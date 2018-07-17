@@ -4,12 +4,14 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodejs app.js"
+    "start": "babel-node app.js --presets=env"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "config": "^1.30.0",
     "koa": "^2.5.2",
     "koa-router": "^7.4.0",
