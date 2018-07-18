@@ -104,7 +104,7 @@ bot.on("message", msg => {
 		type: "random",
 		rating: "pg-13"
 	};
-	const gifURL = encodeURI(
+	let gifURL = encodeURI(
 		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
 	);
 	let textInclude = "Гифка!";
@@ -116,6 +116,6 @@ bot.on("message", msg => {
 			.includes(textInclude)
 	) {
 		console.log(gifURL);
-		bot.sendVideo(id, gifURL);
+		// bot.sendVideo(id, gifURL);
 	}
 });
