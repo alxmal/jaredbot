@@ -115,6 +115,7 @@ bot.on("message", msg => {
 			.toLowerCase()
 			.includes(textInclude)
 	) {
+		console.log(gifURL);
 		bot.sendVideo(id, gifURL);
 	}
 });
