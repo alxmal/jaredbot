@@ -27,15 +27,15 @@ app.listen(PORT, () => {
 	console.log(`Listening on ${PORT}`);
 });
 
-bot.on("message", msg => {
-	const {
-		chat: { id }
-	} = msg;
-	console.log(msg);
-	bot.sendMessage(id, "Pong");
-});
+// bot.on("message", msg => {
+// 	const {
+// 		chat: { id }
+// 	} = msg;
+// 	console.log(msg);
+// 	bot.sendMessage(id, "Pong");
+// });
 
-bot.onText(/\/about (.+)/, (msg, match) => {
+bot.onText(/\/about/, msg => {
 	const {
 		chat: { id }
 	} = msg;
@@ -43,6 +43,7 @@ bot.onText(/\/about (.+)/, (msg, match) => {
 	bot.sendMessage(id, answer);
 });
 
+/* Стикер с медведем в ответ на ругательство */
 bot.on("message", msg => {
 	const {
 		chat: { id }
