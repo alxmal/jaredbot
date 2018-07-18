@@ -110,11 +110,11 @@ bot.on("message", msg => {
 	let textInclude = "гифка";
 	let giphyGif = "";
 
-	fetch(gifURL)
-		.then(res => res.json())
-		.then(data => {
-			giphyGif = data.images.downsized_large.url;
-		});
+	// fetch(gifURL)
+	// 	.then(res => res.json())
+	// 	.then(data => {
+	// 		giphyGif = data.images.downsized_large.url;
+	// 	});
 
 	if (
 		text &&
@@ -124,6 +124,7 @@ bot.on("message", msg => {
 			.includes(textInclude)
 	) {
 		console.log(giphyGif);
+		console.log(giphyURL);
 		// bot.sendVideo(id, gifURL);
 	}
 });
