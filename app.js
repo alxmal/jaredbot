@@ -31,12 +31,22 @@ bot.on("message", msg => {
 	const {
 		chat: { id }
 	} = msg;
+	console.log(msg);
 	bot.sendMessage(id, "Pong");
 });
 
-bot.onText(/\/help (.+)/, (msg, [SourceBuffer, match]) => {
+bot.onText(/\/about (.+)/, (msg, match) => {
 	const {
 		chat: { id }
 	} = msg;
-	bot.sendMessage(id, match);
+	let answer = "Вакабот заботится о вашем отпуске. Вакабот молодец.";
+	bot.sendMessage(id, answer);
 });
+
+// bot.on("message", msg => {
+// 	const {
+// 		chat: { id }
+// 	} = msg;
+// 	let answer = "Вакабот заботится о вашем отпуске. Вакабот молодец.";
+// 	bot.sendMessage(id, answer);
+// });
