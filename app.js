@@ -125,7 +125,7 @@ bot.on("message", msg => {
 			) {
 				// console.log(typeof giphyGif);
 				// console.log(gifURL);
-				bot.sendMessage(id, data.data.images.downsized_large.url);
+				bot.sendDocument(id, data.data.images.downsized_large.url);
 			}
 		}
 	});
