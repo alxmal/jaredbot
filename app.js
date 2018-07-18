@@ -129,6 +129,6 @@ bot.on("message", msg => {
 	) {
 		console.log(giphyGif);
 		console.log(gifURL);
-		bot.sendDocument(id, giphyGif);
+		bot.sendMessage(id, giphyGif);
 	}
 });
