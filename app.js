@@ -116,6 +116,7 @@ bot.on("message", msg => {
 			let data = JSON.parse(body);
 			// giphyGif = data.images.downsized_large.url;
 			console.log(data.data.images.downsized_large.url);
+			giphyGif = data.data.images.downsized_large.url;
 		}
 	});
 
@@ -128,6 +129,6 @@ bot.on("message", msg => {
 	) {
 		console.log(giphyGif);
 		console.log(gifURL);
-		// bot.sendVideo(id, gifURL);
+		bot.sendVideo(id, giphyGif);
 	}
 });
