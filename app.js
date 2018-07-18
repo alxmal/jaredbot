@@ -27,14 +27,24 @@ app.listen(PORT, () => {
 	console.log(`Listening on ${PORT}`);
 });
 
-// bot.on("message", msg => {
-// 	const {
-// 		chat: { id }
-// 	} = msg;
-// 	console.log(msg);
-// 	bot.sendMessage(id, "Pong");
-// });
+/* Отладка */
+bot.on("message", msg => {
+	const {
+		chat: { id }
+	} = msg;
+	console.log(msg);
+});
 
+/* Ответ на /help */
+bot.onText(/\/help/, msg => {
+	const {
+		chat: { id }
+	} = msg;
+	let answer = "Нет команд. Вакабот пока ничего не умеет.";
+	bot.sendMessage(id, answer);
+});
+
+/* Ответ на /about */
 bot.onText(/\/about/, msg => {
 	const {
 		chat: { id }
