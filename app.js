@@ -108,6 +108,14 @@ bot.on("message", msg => {
 		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
 	);
 	let textInclude = "гифка";
+
+	// async function getGiphyGif() {
+	// 	let res = await fetch(gifURL);
+	// 	let giphyData = res.json();
+	// }
+
+	const giphyData = asyncFetch(gifURL);
+
 	if (
 		text &&
 		text
@@ -115,7 +123,14 @@ bot.on("message", msg => {
 			.toLowerCase()
 			.includes(textInclude)
 	) {
-		console.log(gifURL);
+		console.log(giphyData);
 		// bot.sendVideo(id, gifURL);
 	}
 });
+
+/* Утилиты */
+async function asyncFetch(url) {
+	let res = await fetch(url);
+	if (res.ok) return await res.json();
+	throw new Error(res.status);
+}
