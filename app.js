@@ -127,7 +127,7 @@ bot.on("message", msg => {
 			.includes(textInclude)
 	) {
 		console.log(giphyGif);
-		console.log(gipURL);
+		console.log(gifURL);
 		// bot.sendVideo(id, gifURL);
 	}
 });
