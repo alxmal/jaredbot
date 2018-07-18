@@ -115,7 +115,7 @@ bot.on("message", msg => {
 		if (!error && response.statusCode == 200) {
 			let data = JSON.parse(body);
 			// giphyGif = data.images.downsized_large.url;
-			console.log(data.data.images.downsized_large.url);
+			// console.log(data.data.images.downsized_large.url);
 			giphyGif = data.data.images.downsized_large.url;
 		}
 	});
@@ -128,7 +128,7 @@ bot.on("message", msg => {
 			.includes(textInclude)
 	) {
 		console.log(giphyGif);
-		console.log(gifURL);
+		// console.log(gifURL);
 		bot.sendMessage(id, giphyGif);
 	}
 });
