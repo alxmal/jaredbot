@@ -61,6 +61,7 @@ bot.on("message", msg => {
 	let textInclude = "блядь";
 	let stickerId = "CAADAgADkgEAAhmGAwABwd3g-2GZO1wC";
 	if (
+		msg.txt &&
 		msg.text
 			.toString()
 			.toLowerCase()
