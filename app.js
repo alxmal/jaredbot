@@ -114,8 +114,8 @@ bot.on("message", msg => {
 	request(gifURL, function(error, response, body) {
 		if (!error && response.statusCode == 200) {
 			let data = JSON.parse(body);
-			console.log(data.data.images.downsized_large.url);
-			giphyGif = "" + data.data.images.downsized_large.url;
+			console.log(typeof data.data.images.downsized_large.url);
+			// giphyGif = "" + data.data.images.downsized_large.url;
 		}
 	});
 
@@ -126,7 +126,7 @@ bot.on("message", msg => {
 			.toLowerCase()
 			.includes(textInclude)
 	) {
-		console.log(giphyGif);
+		console.log(typeof giphyGif);
 		// console.log(gifURL);
 		// bot.sendMessage(id, giphyGif);
 	}
