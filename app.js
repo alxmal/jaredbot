@@ -74,22 +74,22 @@ bot.on("message", msg => {
 });
 
 /* Стикер с Путиным в ответ на упоминание */
-bot.onText(/путин/, msg => {
+bot.on("message", msg => {
 	const {
 		chat: { id },
 		text
 	} = msg;
-	// let textInclude = "путин";
+	let textInclude = "путин";
 	let stickerId = "CAADAgADdwEAAp6c1AXSYeGRV6WhyAI";
-	// if (
-	// 	text &&
-	// 	text
-	// 		.toString()
-	// 		.toLowerCase()
-	// 		.includes(textInclude)
-	// ) {
-	bot.sendSticker(id, stickerId);
-	// }
+	if (
+		text &&
+		text
+			.toString()
+			.toLowerCase()
+			.includes(textInclude)
+	) {
+		bot.sendSticker(id, stickerId);
+	}
 });
 
 /* Отправить рандомную гифку с giphy api */
