@@ -114,9 +114,8 @@ bot.on("message", msg => {
 	request(gifURL, function(error, response, body) {
 		if (!error && response.statusCode == 200) {
 			let data = JSON.parse(body);
-			// giphyGif = data.images.downsized_large.url;
-			// console.log(data.data.images.downsized_large.url);
-			giphyGif = data.data.images.downsized_large.url;
+			console.log(data.data.images.downsized_large.url);
+			giphyGif = "" + data.data.images.downsized_large.url;
 		}
 	});
 
