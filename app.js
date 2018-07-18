@@ -56,13 +56,14 @@ bot.onText(/\/about/, msg => {
 /* Стикер с медведем в ответ на ругательство */
 bot.on("message", msg => {
 	const {
-		chat: { id }
+		chat: { id },
+		text
 	} = msg;
 	let textInclude = "блядь";
 	let stickerId = "CAADAgADkgEAAhmGAwABwd3g-2GZO1wC";
 	if (
-		msg.txt &&
-		msg.text
+		text &&
+		text
 			.toString()
 			.toLowerCase()
 			.includes(textInclude)
@@ -115,14 +116,3 @@ bot.on("message", msg => {
 		bot.sendVideo(id, gifURL);
 	}
 });
-
-let giphyURL = encodeURI(
-	giphy.baseURL +
-		giphy.type +
-		"?api_key=" +
-		giphy.key +
-		"&tag=" +
-		giphy.tag +
-		"&rating=" +
-		giphy.rating
-);
