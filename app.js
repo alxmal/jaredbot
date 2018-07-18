@@ -23,3 +23,17 @@ app.use(router.routes());
 app.listen(PORT, () => {
 	console.log(`Listening on ${PORT}`);
 });
+
+bot.on("message", msg => {
+	const {
+		chat: { id }
+	} = msg;
+	bot.sendMessage(id, "Pong");
+});
+
+bot.onText(/\/help (.+)/, (msg, [SourceBuffer, match]) => {
+	const {
+		chat: { id }
+	} = msg;
+	bot.sendMessage(id, match);
+});
