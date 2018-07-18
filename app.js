@@ -70,3 +70,59 @@ bot.on("message", msg => {
 		bot.sendSticker(id, stickerId);
 	}
 });
+
+/* Стикер с Путиным в ответ на упоминание */
+bot.on("message", msg => {
+	const {
+		chat: { id }
+	} = msg;
+	let textInclude = "путин";
+	let stickerId = "CAADAgADdwEAAp6c1AXSYeGRV6WhyAI";
+	if (
+		msg.txt &&
+		msg.text
+			.toString()
+			.toLowerCase()
+			.includes(textInclude)
+	) {
+		bot.sendSticker(id, stickerId);
+	}
+});
+
+/* Отправить рандомную гифку с giphy api */
+bot.on("message", msg => {
+	const {
+		chat: { id }
+	} = msg;
+	const giphy = {
+		baseURL: "https://api.giphy.com/v1/gifs/",
+		key: config.get("giphy_key"),
+		tag: "fail",
+		type: "random",
+		rating: "pg-13"
+	};
+	const gifURL = encodeURI(
+		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
+	);
+	let textInclude = "Гифка!";
+	if (
+		msg.txt &&
+		msg.text
+			.toString()
+			.toLowerCase()
+			.includes(textInclude)
+	) {
+		bot.sendVideo(id, gifURL);
+	}
+});
+
+let giphyURL = encodeURI(
+	giphy.baseURL +
+		giphy.type +
+		"?api_key=" +
+		giphy.key +
+		"&tag=" +
+		giphy.tag +
+		"&rating=" +
+		giphy.rating
+);
