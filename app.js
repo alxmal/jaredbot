@@ -43,10 +43,18 @@ bot.onText(/\/about (.+)/, (msg, match) => {
 	bot.sendMessage(id, answer);
 });
 
-// bot.on("message", msg => {
-// 	const {
-// 		chat: { id }
-// 	} = msg;
-// 	let answer = "Вакабот заботится о вашем отпуске. Вакабот молодец.";
-// 	bot.sendMessage(id, answer);
-// });
+bot.on("message", msg => {
+	const {
+		chat: { id }
+	} = msg;
+	let textInclude = "блядь";
+	let stickerId = "CAADAgADkgEAAhmGAwABwd3g-2GZO1wC";
+	if (
+		msg.text
+			.toString()
+			.toLowerCase()
+			.includes(textInclude)
+	) {
+		bot.sendSticker(id, stickerId);
+	}
+});
