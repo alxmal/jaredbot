@@ -75,13 +75,14 @@ bot.on("message", msg => {
 /* Стикер с Путиным в ответ на упоминание */
 bot.on("message", msg => {
 	const {
-		chat: { id }
+		chat: { id },
+		text
 	} = msg;
 	let textInclude = "путин";
 	let stickerId = "CAADAgADdwEAAp6c1AXSYeGRV6WhyAI";
 	if (
-		msg.txt &&
-		msg.text
+		text &&
+		text
 			.toString()
 			.toLowerCase()
 			.includes(textInclude)
@@ -93,7 +94,8 @@ bot.on("message", msg => {
 /* Отправить рандомную гифку с giphy api */
 bot.on("message", msg => {
 	const {
-		chat: { id }
+		chat: { id },
+		text
 	} = msg;
 	const giphy = {
 		baseURL: "https://api.giphy.com/v1/gifs/",
@@ -107,8 +109,8 @@ bot.on("message", msg => {
 	);
 	let textInclude = "Гифка!";
 	if (
-		msg.txt &&
-		msg.text
+		text &&
+		text
 			.toString()
 			.toLowerCase()
 			.includes(textInclude)
