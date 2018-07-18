@@ -107,7 +107,7 @@ bot.on("message", msg => {
 	let gifURL = encodeURI(
 		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
 	);
-	let textInclude = "Гифка!";
+	let textInclude = "гифка";
 	if (
 		text &&
 		text
