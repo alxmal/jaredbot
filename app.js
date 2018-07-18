@@ -5,6 +5,7 @@ import config from "config";
 import Koa from "koa";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
+import request from "request";
 
 const TOKEN = config.get("token");
 const PORT = config.get("port");
@@ -110,11 +111,12 @@ bot.on("message", msg => {
 	let textInclude = "гифка";
 	let giphyGif = "";
 
-	// fetch(gifURL)
-	// 	.then(res => res.json())
-	// 	.then(data => {
-	// 		giphyGif = data.images.downsized_large.url;
-	// 	});
+	request(gifURL, function(error, response, body) {
+		if (!error && response.statusCode == 200) {
+			let data = JSON.parse(body);
+			giphyGif = data.images.downsized_large.url;
+		}
+	});
 
 	if (
 		text &&
@@ -128,10 +130,3 @@ bot.on("message", msg => {
 		// bot.sendVideo(id, gifURL);
 	}
 });
-
-// /* Утилиты */
-// async function asyncFetch(url) {
-// 	let res = await fetch(url);
-// 	if (res.ok) return await res.json();
-// 	throw new Error(res.status);
-// }
