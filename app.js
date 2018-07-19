@@ -5,7 +5,7 @@ import config from "config";
 import Koa from "koa";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
-import request from "request";
+import fetch from "node-fetch";
 
 const TOKEN = config.get("token");
 const PORT = config.get("port");
@@ -143,10 +143,21 @@ bot.onText(/\/gifme/, msg => {
 		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
 	);
 
-	request(gifURL, function(error, response, body) {
-		if (!error && response.statusCode == 200) {
-			let data = JSON.parse(body);
-			bot.sendDocument(id, data.data.images.downsized_large.url);
-		}
-	});
+	// request(gifURL, function(error, response, body) {
+	// 	if (!error && response.statusCode == 200) {
+	// 		let data = JSON.parse(body);
+	// 		bot.sendDocument(id, data.data.images.downsized_large.url);
+	// 	}
+	// });
+	try {
+		const res = await fetch(url);
+		const data = await res.json();
+		bot.sendDocument(id, data.data.images.downsized_large.url);
+	} catch (err) {
+		console.log(err);
+	}
 });
+
+// const getAsyncURL = async url => {
+	
+// };
