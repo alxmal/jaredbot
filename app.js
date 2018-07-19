@@ -149,15 +149,14 @@ bot.onText(/\/gifme/, msg => {
 	// 		bot.sendDocument(id, data.data.images.downsized_large.url);
 	// 	}
 	// });
-	try {
-		const res = await fetch(url);
-		const data = await res.json();
-		bot.sendDocument(id, data.data.images.downsized_large.url);
-	} catch (err) {
-		console.log(err);
+	async function getAsyncURL(gifURL) {
+		try {
+			const res = await fetch(gifURL);
+			const data = await res.json();
+			bot.sendDocument(id, data.data.images.downsized_large.url);
+		} catch (err) {
+			console.log(err);
+		}
 	}
+	getAsyncURL();
 });
-
-// const getAsyncURL = async url => {
-	
-// };
