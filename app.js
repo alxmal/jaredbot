@@ -94,7 +94,40 @@ bot.on("message", msg => {
 });
 
 /* Отправить рандомную гифку с giphy api */
-bot.on("message", msg => {
+// bot.on("message", msg => {
+// 	const {
+// 		chat: { id },
+// 		text
+// 	} = msg;
+// 	const giphy = {
+// 		baseURL: "https://api.giphy.com/v1/gifs/",
+// 		key: config.get("giphy_key"),
+// 		tag: "fail",
+// 		type: "random",
+// 		rating: "pg-13"
+// 	};
+// 	let gifURL = encodeURI(
+// 		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
+// 	);
+// 	let textInclude = "Джаред дай гифку";
+
+// 	request(gifURL, function(error, response, body) {
+// 		if (!error && response.statusCode == 200) {
+// 			let data = JSON.parse(body);
+// 			if (
+// 				text &&
+// 				text
+// 					.toString()
+// 					.toLowerCase()
+// 					.includes(textInclude)
+// 			) {
+// 				bot.sendDocument(id, data.data.images.downsized_large.url);
+// 			}
+// 		}
+// 	});
+// });
+
+bot.onText(/\/gifme/, msg => {
 	const {
 		chat: { id },
 		text
@@ -109,20 +142,11 @@ bot.on("message", msg => {
 	let gifURL = encodeURI(
 		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
 	);
-	let textInclude = "гифка";
 
 	request(gifURL, function(error, response, body) {
 		if (!error && response.statusCode == 200) {
 			let data = JSON.parse(body);
-			if (
-				text &&
-				text
-					.toString()
-					.toLowerCase()
-					.includes(textInclude)
-			) {
-				bot.sendDocument(id, data.data.images.downsized_large.url);
-			}
+			bot.sendDocument(id, data.data.images.downsized_large.url);
 		}
 	});
 });
