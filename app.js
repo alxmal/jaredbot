@@ -41,7 +41,7 @@ bot.onText(/\/help/, msg => {
 	const {
 		chat: { id }
 	} = msg;
-	let answer = "Нет команд. Вакабот пока ничего не умеет.";
+	let answer = "Джаред пока ничего не умеет 😕";
 	bot.sendMessage(id, answer);
 });
 
@@ -50,28 +50,29 @@ bot.onText(/\/about/, msg => {
 	const {
 		chat: { id }
 	} = msg;
-	let answer = "Вакабот заботится о вашем отпуске. Вакабот молодец.";
+	let answer =
+		"Джаред скрам-мастер от бога. Он поможет с любым вопросом и решит любую проблему. Просто спроси у Джареда!";
 	bot.sendMessage(id, answer);
 });
 
-/* Стикер с медведем в ответ на ругательство */
-bot.on("message", msg => {
-	const {
-		chat: { id },
-		text
-	} = msg;
-	let textInclude = "блядь";
-	let stickerId = "CAADAgADkgEAAhmGAwABwd3g-2GZO1wC";
-	if (
-		text &&
-		text
-			.toString()
-			.toLowerCase()
-			.includes(textInclude)
-	) {
-		bot.sendSticker(id, stickerId);
-	}
-});
+// /* Стикер с медведем в ответ на ругательство */
+// bot.on("message", msg => {
+// 	const {
+// 		chat: { id },
+// 		text
+// 	} = msg;
+// 	let textInclude = "блядь";
+// 	let stickerId = "CAADAgADkgEAAhmGAwABwd3g-2GZO1wC";
+// 	if (
+// 		text &&
+// 		text
+// 			.toString()
+// 			.toLowerCase()
+// 			.includes(textInclude)
+// 	) {
+// 		bot.sendSticker(id, stickerId);
+// 	}
+// });
 
 /* Стикер с Путиным в ответ на упоминание */
 bot.on("message", msg => {
@@ -109,13 +110,10 @@ bot.on("message", msg => {
 		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
 	);
 	let textInclude = "гифка";
-	let giphyGif = "";
 
 	request(gifURL, function(error, response, body) {
 		if (!error && response.statusCode == 200) {
 			let data = JSON.parse(body);
-			// console.log(data.data.images.downsized_large.url);
-			// giphyGif = "" + data.data.images.downsized_large.url;
 			if (
 				text &&
 				text
@@ -123,8 +121,6 @@ bot.on("message", msg => {
 					.toLowerCase()
 					.includes(textInclude)
 			) {
-				// console.log(typeof giphyGif);
-				// console.log(gifURL);
 				bot.sendDocument(id, data.data.images.downsized_large.url);
 			}
 		}
