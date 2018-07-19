@@ -149,14 +149,14 @@ bot.onText(/\/gifme/, msg => {
 	// 		bot.sendDocument(id, data.data.images.downsized_large.url);
 	// 	}
 	// });
-	async function getAsyncURL(gifURL) {
+	async function getAsyncURL(url) {
 		try {
-			const res = await fetch(gifURL);
+			const res = await fetch(url);
 			const data = await res.json();
 			bot.sendDocument(id, data.data.images.downsized_large.url);
 		} catch (err) {
 			console.log(err);
 		}
 	}
-	getAsyncURL();
+	getAsyncURL(gifURL);
 });
