@@ -31,12 +31,14 @@ app.listen(PORT, () => {
 
 /////* Планировщик задач *////
 let morningGreetJob = new CronJob({
-	cronTime: "00 25 09 * * 1-5",
+	cronTime: "00 00 10 * * 1-5",
 	onTick: () => {
 		let morningGreet = "Доброе утро!";
 		let chatId = -1001095382082;
 		bot.sendMessage(chatId, morningGreet);
-	}
+	},
+	start: true,
+	timeZone: "Russia/Moscow"
 });
 
 /////* Обработчики чата для бота *////
