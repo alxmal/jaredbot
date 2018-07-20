@@ -112,6 +112,7 @@ bot.on("message", msg => {
 	} = msg;
 	let textInclude = "путин";
 	let stickerId = "CAADAgADdwEAAp6c1AXSYeGRV6WhyAI";
+	let voiceId = "AwADAgADfAEAAl3-kUqHo5Gi9RablQI";
 	if (
 		text &&
 		text
@@ -120,6 +121,7 @@ bot.on("message", msg => {
 			.includes(textInclude)
 	) {
 		bot.sendSticker(id, stickerId);
+		bot.sendVoice(chatId, voiceId);
 	}
 });
 
