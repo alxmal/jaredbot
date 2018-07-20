@@ -6,6 +6,7 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const bodyParser = require("koa-bodyparser");
 const fetch = require("node-fetch");
+const CronJob = require("cron").CronJob;
 
 const TOKEN = config.get("token");
 const PORT = config.get("port");
@@ -28,6 +29,17 @@ app.listen(PORT, () => {
 	console.log(`Listening on ${PORT}`);
 });
 
+/////* Планировщик задач *////
+let morningGreetJob = new CronJob({
+	cronTime: "00 25 09 * * 1-5",
+	onTick: () => {
+		let morningGreet = "Доброе утро!";
+		let chatId = -1001095382082;
+		bot.sendMessage(chatId, morningGreet);
+	}
+});
+
+/////* Обработчики чата для бота *////
 /* Отладка */
 bot.on("message", msg => {
 	const {
