@@ -63,6 +63,17 @@ let goHome = new CronJob({
 	timeZone: "Europe/Moscow"
 });
 
+let itsFriday = new CronJob({
+	cronTime: "00 55 17 * * 5",
+	onTick: () => {
+		let bamboleilo = "БАМБОЛЕЙЛОООО, БАМБОЛЕЙЛООООО!";
+		let chatId = -1001095382082;
+		bot.sendMessage(chatId, bamboleilo);
+	},
+	start: true,
+	timeZone: "Europe/Moscow"
+});
+
 /////* Обработчики чата для бота *////
 /* Отладка */
 bot.on("message", msg => {
