@@ -31,11 +31,33 @@ app.listen(PORT, () => {
 
 /////* Планировщик задач *////
 let morningGreetJob = new CronJob({
-	cronTime: "00 00 10 * * 1-5",
+	cronTime: "00 00 09 * * 1-5",
 	onTick: () => {
 		let morningGreet = "Доброе утро!";
 		let chatId = -1001095382082;
 		bot.sendMessage(chatId, morningGreet);
+	},
+	start: true,
+	timeZone: "Europe/Moscow"
+});
+
+let timeToEat = new CronJob({
+	cronTime: "00 00 12 * * 1-5",
+	onTick: () => {
+		let eatMessage = "Время обеда, приятного аппетита.";
+		let chatId = -1001095382082;
+		bot.sendMessage(chatId, eatMessage);
+	},
+	start: true,
+	timeZone: "Europe/Moscow"
+});
+
+let goHome = new CronJob({
+	cronTime: "00 55 17 * * 1-5",
+	onTick: () => {
+		let byeMessage = "Пора домой!";
+		let chatId = -1001095382082;
+		bot.sendMessage(chatId, byeMessage);
 	},
 	start: true,
 	timeZone: "Europe/Moscow"
