@@ -121,7 +121,7 @@ bot.on("message", msg => {
 			.includes(textInclude)
 	) {
 		bot.sendSticker(id, stickerId);
-		bot.sendVoice(chatId, voiceId);
+		bot.sendVoice(id, voiceId);
 	}
 });
 
