@@ -64,11 +64,13 @@ let goHome = new CronJob({
 });
 
 let itsFriday = new CronJob({
-	cronTime: "00 55 17 * * 5",
+	cronTime: "03 55 17 * * 5",
 	onTick: () => {
 		let bamboleilo = "БАМБОЛЕЙЛОООО, БАМБОЛЕЙЛООООО!";
+		let voiceId = "AwADAgADfAEAAl3-kUqHo5Gi9RablQI";
 		let chatId = -1001095382082;
 		bot.sendMessage(chatId, bamboleilo);
+		bot.sendVoice(chatId, voiceId);
 	},
 	start: true,
 	timeZone: "Europe/Moscow"
@@ -121,10 +123,27 @@ bot.on("message", msg => {
 	}
 });
 
-bot.onText(/\/gifme/, msg => {
+bot.on("message", msg => {
 	const {
 		chat: { id },
 		text
+	} = msg;
+	let textInclude = "Джаред, как ты?";
+	let answer = "Спасибо, всё в порядке. Немного грущу...";
+	if (
+		text &&
+		text
+			.toString()
+			.toLowerCase()
+			.includes(textInclude)
+	) {
+		bot.sendSticker(id, answer);
+	}
+});
+
+bot.onText(/\/gifme/, msg => {
+	const {
+		chat: { id }
 	} = msg;
 	const giphy = {
 		baseURL: "https://api.giphy.com/v1/gifs/",
