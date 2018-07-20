@@ -120,8 +120,8 @@ bot.on("message", msg => {
 			.toLowerCase()
 			.includes(textInclude)
 	) {
-		bot.sendSticker(id, stickerId);
 		bot.sendVoice(id, voiceId);
+		bot.sendSticker(id, stickerId);
 	}
 });
 
