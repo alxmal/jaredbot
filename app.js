@@ -38,7 +38,7 @@ let morningGreetJob = new CronJob({
 		bot.sendMessage(chatId, morningGreet);
 	},
 	start: true,
-	timeZone: "Russia/Moscow"
+	timeZone: "Europe/Moscow"
 });
 
 /////* Обработчики чата для бота *////
