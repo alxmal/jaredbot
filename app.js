@@ -123,12 +123,11 @@ bot.on("message", msg => {
 	}
 });
 
-bot.on("message", msg => {
+bot.onText(/Джаред, как ты?/, msg => {
 	const {
 		chat: { id },
 		text
 	} = msg;
-	let textInclude = "Джаред, как ты?";
 	let answer = "Спасибо, всё в порядке. Немного грущу...";
 	if (
 		text &&
