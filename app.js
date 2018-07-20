@@ -112,7 +112,6 @@ bot.on("message", msg => {
 	} = msg;
 	let textInclude = "путин";
 	let stickerId = "CAADAgADdwEAAp6c1AXSYeGRV6WhyAI";
-	let voiceId = "AwADAgADfAEAAl3-kUqHo5Gi9RablQI";
 	if (
 		text &&
 		text
@@ -120,28 +119,17 @@ bot.on("message", msg => {
 			.toLowerCase()
 			.includes(textInclude)
 	) {
-		console.log(voiceId);
-		bot.sendVoice(id, voiceId);
 		bot.sendSticker(id, stickerId);
 	}
 });
 
-bot.on("message", msg => {
+bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
 	const {
 		chat: { id },
 		text
 	} = msg;
-	let textInclude = "Джаред, как дела?";
 	let answer = "Спасибо, всё в порядке. Немного грущу...";
-	if (
-		text &&
-		text
-			.toString()
-			.toLowerCase()
-			.includes(textInclude)
-	) {
-		bot.sendMessage(id, answer);
-	}
+	bot.sendMessage(id, answer);
 });
 
 bot.onText(/\/gifme/, msg => {
