@@ -123,19 +123,24 @@ bot.on("message", msg => {
 	}
 });
 
-bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
+let silentMode = false;
+let silentTime = 10000;
+
+function getSilent() {
 	clearTimeout(timerId);
+	let timerId = setTimeout(() => {
+		silentMode = !silentMode;
+	}, silentTime);
+}
+
+bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
 	const {
 		chat: { id },
 		text
 	} = msg;
-	let silentMode = false;
-	let silentTime = 10000;
 	let answer = "Спасибо, всё в порядке. Немного грущу...";
 	bot.sendMessage(id, answer);
-	let timerId = setTimeout(() => {
-		silentMode = !silentMode;
-	}, silentTime);
+	getSilent();
 });
 
 bot.onText(/\/gifme/, msg => {
