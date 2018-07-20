@@ -140,7 +140,8 @@ bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
 	} = msg;
 	let answer = "Спасибо, всё в порядке. Немного грущу...";
 	bot.sendMessage(id, answer);
-	getSilent();
+	silentMode = !silentMode;
+	if ((silentMode = false)) getSilent();
 });
 
 bot.onText(/\/gifme/, msg => {
