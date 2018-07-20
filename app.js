@@ -136,7 +136,7 @@ bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
 			.toLowerCase()
 			.includes(textInclude)
 	) {
-		bot.sendSticker(id, answer);
+		bot.sendMessage(id, answer);
 	}
 });
 
