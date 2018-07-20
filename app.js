@@ -123,7 +123,7 @@ bot.on("message", msg => {
 	}
 });
 
-bot.onText(/^(?=.*?\bone\b)(?=.*?\btwo\b)(?=.*?\bthree\b).*$/, msg => {
+bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
 	const {
 		chat: { id },
 		text
