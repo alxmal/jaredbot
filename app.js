@@ -120,16 +120,18 @@ bot.on("message", msg => {
 			.toLowerCase()
 			.includes(textInclude)
 	) {
+		console.log(voiceId);
 		bot.sendVoice(id, voiceId);
 		bot.sendSticker(id, stickerId);
 	}
 });
 
-bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
+bot.on("message", msg => {
 	const {
 		chat: { id },
 		text
 	} = msg;
+	let textInclude = "Джаред, как дела?";
 	let answer = "Спасибо, всё в порядке. Немного грущу...";
 	if (
 		text &&
