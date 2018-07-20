@@ -69,8 +69,8 @@ let itsFriday = new CronJob({
 		let bamboleilo = "БАМБОЛЕЙЛОООО, БАМБОЛЕЙЛООООО!";
 		let voiceId = "AwADAgADfAEAAl3-kUqHo5Gi9RablQI";
 		let chatId = -1001095382082;
-		bot.sendMessage(chatId, bamboleilo);
 		bot.sendVoice(chatId, voiceId);
+		bot.sendMessage(chatId, bamboleilo);
 	},
 	start: true,
 	timeZone: "Europe/Moscow"
@@ -124,12 +124,18 @@ bot.on("message", msg => {
 });
 
 bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
+	clearTimeout(timerId);
 	const {
 		chat: { id },
 		text
 	} = msg;
+	let silentMode = false;
+	let silentTime = 10000;
 	let answer = "Спасибо, всё в порядке. Немного грущу...";
 	bot.sendMessage(id, answer);
+	let timerId = setTimeout(() => {
+		silentMode = !silentMode;
+	}, silentTime);
 });
 
 bot.onText(/\/gifme/, msg => {
