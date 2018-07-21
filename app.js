@@ -135,13 +135,13 @@ function getSilent() {
 }
 
 bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
+	console.log(silentMode);
 	const {
 		chat: { id }
 	} = msg;
 	let answer = "Спасибо, всё в порядке. Немного грущу...";
 	if ((silentMode = false)) {
 		bot.sendMessage(id, answer);
-		console.log(silentMode);
 		silentMode = true;
 		getSilent();
 	} else return;
