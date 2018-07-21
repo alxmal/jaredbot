@@ -123,6 +123,7 @@ bot.on("message", msg => {
 	}
 });
 
+/* Таймер антифлуд на ответы бота */
 let silentMode = false;
 let silentTime = 10000;
 
@@ -135,13 +136,14 @@ function getSilent() {
 
 bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
 	const {
-		chat: { id },
-		text
+		chat: { id }
 	} = msg;
 	let answer = "Спасибо, всё в порядке. Немного грущу...";
-	bot.sendMessage(id, answer);
-	silentMode = !silentMode;
-	if ((silentMode = true)) getSilent();
+	if (!silentMode) {
+		bot.sendMessage(id, answer);
+		silentMode = !silentMode;
+		getSilent();
+	}
 });
 
 bot.onText(/\/gifme/, msg => {
