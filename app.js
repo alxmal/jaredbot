@@ -128,9 +128,9 @@ let silentMode = false;
 let silentTime = 10000;
 
 function getSilent() {
-	clearTimeout(timerId);
-	let timerId = setTimeout(() => {
-		silentMode = !silentMode;
+	// clearTimeout(timerId);
+	setTimeout(() => {
+		silentMode = false;
 	}, silentTime);
 }
 
@@ -139,12 +139,12 @@ bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
 		chat: { id }
 	} = msg;
 	let answer = "Спасибо, всё в порядке. Немного грущу...";
-	if (!silentMode) {
+	if ((silentMode = false)) {
 		bot.sendMessage(id, answer);
 		console.log(silentMode);
-		silentMode = !silentMode;
+		silentMode = true;
 		getSilent();
-	}
+	} else return;
 });
 
 bot.onText(/\/gifme/, msg => {
