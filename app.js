@@ -136,7 +136,7 @@ bot.onText(/\/gifme/, msg => {
 	const giphy = {
 		baseURL: "https://api.giphy.com/v1/gifs/",
 		key: config.get("giphy_key"),
-		tag: gifTags.fail,
+		tag: giphyTag.fail,
 		type: "random",
 		rating: "pg-13"
 	};
