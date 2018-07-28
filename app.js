@@ -143,12 +143,25 @@ bot.onText(/\/gifme/, msg => {
 	let gifURL = encodeURI(
 		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
 	);
+	const text = "Какую гифку запостить?";
 
-	bot.sendMessage(id, "Какую гифку запостить?", {
-		reply_markup: {
-			keyboard: [["Смешную", "Фэйл", "Котэ", "Мемас"], ["Рандом"]]
-		}
+	let keyboardStr = JSON.stringify({
+		inline_keyboard: [
+			[
+				{ text: "Смешную", callback_data: "funny" },
+				{ text: "Фэйл", callback_data: "fail" },
+				{ text: "Котэ", callback_data: "cats" },
+				{ text: "Мемас", callback_data: "memes" },
+				{ text: "Рандом", callback_data: "random" }
+			]
+		]
 	});
+
+	let keyboard = {
+		reply_markup: JSON.parse(keyboardStr)
+	};
+
+	bot.sendMessage(id, text, keyboard);
 
 	async function getAsyncURL(url) {
 		try {
@@ -160,6 +173,10 @@ bot.onText(/\/gifme/, msg => {
 		}
 	}
 	// getAsyncURL(gifURL);
+});
+
+bot.on("callback_query", msg => {
+	console.log(msg);
 });
 
 // bot.onText(/\/gifme/, msg => {
