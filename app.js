@@ -151,16 +151,8 @@ bot.onText(/\/gifme/, msg => {
 const giphy = {
 	baseURL: "https://api.giphy.com/v1/gifs/",
 	key: config.get("giphy_key"),
-	tag: giphyTag.fail,
 	type: "random",
 	rating: "pg-13"
-};
-
-const giphyTag = {
-	funny: "funny",
-	fail: "fail",
-	cats: "cats",
-	memes: "memes"
 };
 
 bot.on("callback_query", msg => {
