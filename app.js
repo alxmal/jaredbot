@@ -164,6 +164,9 @@ const giphyTag = {
 };
 
 bot.on("callback_query", msg => {
+	const {
+		chat: { id }
+	} = msg;
 	console.log(msg);
 	let gifURL = encodeURI(
 		giphy.baseURL +
@@ -173,10 +176,11 @@ bot.on("callback_query", msg => {
 			"&tag=" +
 			msg.data
 	);
-	getAsyncURL(gifURL);
+
+	getAsyncURL(gifURL, id);
 });
 
-async function getAsyncURL(url) {
+async function getAsyncURL(url, chatId) {
 	try {
 		const res = await fetch(url);
 		const data = await res.json();
@@ -185,6 +189,7 @@ async function getAsyncURL(url) {
 		console.log(err);
 	}
 }
+
 // getAsyncURL(gifURL);
 
 // bot.onText(/\/gifme/, msg => {
