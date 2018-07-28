@@ -127,22 +127,6 @@ bot.onText(/\/gifme/, msg => {
 	const {
 		chat: { id }
 	} = msg;
-	const giphyTag = {
-		funny: "funny",
-		fail: "fail",
-		cats: "cats",
-		memes: "memes"
-	};
-	const giphy = {
-		baseURL: "https://api.giphy.com/v1/gifs/",
-		key: config.get("giphy_key"),
-		tag: giphyTag.fail,
-		type: "random",
-		rating: "pg-13"
-	};
-	let gifURL = encodeURI(
-		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
-	);
 	const text = "Какую гифку запостить?";
 
 	let keyboardStr = JSON.stringify({
@@ -162,22 +146,46 @@ bot.onText(/\/gifme/, msg => {
 	};
 
 	bot.sendMessage(id, text, keyboard);
-
-	async function getAsyncURL(url) {
-		try {
-			const res = await fetch(url);
-			const data = await res.json();
-			bot.sendDocument(id, data.data.images.downsized_large.url);
-		} catch (err) {
-			console.log(err);
-		}
-	}
-	// getAsyncURL(gifURL);
 });
+
+const giphy = {
+	baseURL: "https://api.giphy.com/v1/gifs/",
+	key: config.get("giphy_key"),
+	tag: giphyTag.fail,
+	type: "random",
+	rating: "pg-13"
+};
+
+const giphyTag = {
+	funny: "funny",
+	fail: "fail",
+	cats: "cats",
+	memes: "memes"
+};
 
 bot.on("callback_query", msg => {
 	console.log(msg);
+	let gifURL = encodeURI(
+		giphy.baseURL +
+			giphy.type +
+			"?api_key=" +
+			giphy.key +
+			"&tag=" +
+			msg.data
+	);
+	getAsyncURL(gifURL);
 });
+
+async function getAsyncURL(url) {
+	try {
+		const res = await fetch(url);
+		const data = await res.json();
+		bot.sendDocument(id, data.data.images.downsized_large.url);
+	} catch (err) {
+		console.log(err);
+	}
+}
+// getAsyncURL(gifURL);
 
 // bot.onText(/\/gifme/, msg => {
 // 	const {
