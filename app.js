@@ -123,44 +123,32 @@ bot.on("message", msg => {
 	}
 });
 
-/* Таймер антифлуд на ответы бота */
-let silentMode = false;
-let silentTime = 10000;
-
-function getSilent() {
-	// clearTimeout(timerId);
-	setTimeout(() => {
-		silentMode = false;
-	}, silentTime);
-}
-
-bot.onText(/Джаред,\s(как)\s(дела?)/gi, msg => {
-	console.log(silentMode);
-	const {
-		chat: { id }
-	} = msg;
-	let answer = "Спасибо, всё в порядке. Немного грущу...";
-	if ((silentMode = false)) {
-		bot.sendMessage(id, answer);
-		silentMode = true;
-		getSilent();
-	} else return;
-});
-
 bot.onText(/\/gifme/, msg => {
 	const {
 		chat: { id }
 	} = msg;
+	const giphyTag = {
+		funny: "funny",
+		fail: "fail",
+		cats: "cats",
+		memes: "memes"
+	};
 	const giphy = {
 		baseURL: "https://api.giphy.com/v1/gifs/",
 		key: config.get("giphy_key"),
-		tag: "fail",
+		tag: gifTags.fail,
 		type: "random",
 		rating: "pg-13"
 	};
 	let gifURL = encodeURI(
 		giphy.baseURL + giphy.type + "?api_key=" + giphy.key
 	);
+
+	bot.sendMessage(id, "Какую гифку запостить?", {
+		reply_markup: {
+			keyboard: [["Смешную", "Фэйл", "Котэ", "Мемас"], ["Рандом"]]
+		}
+	});
 
 	async function getAsyncURL(url) {
 		try {
@@ -171,5 +159,38 @@ bot.onText(/\/gifme/, msg => {
 			console.log(err);
 		}
 	}
-	getAsyncURL(gifURL);
+	// getAsyncURL(gifURL);
 });
+
+// bot.onText(/\/gifme/, msg => {
+// 	const {
+// 		chat: { id }
+// 	} = msg;
+// 	const giphyTag = {
+// 		funny: "funny",
+// 		fail: "fail",
+// 		cats: "cats",
+// 		memes: "memes"
+// 	}
+// 	const giphy = {
+// 		baseURL: "https://api.giphy.com/v1/gifs/",
+// 		key: config.get("giphy_key"),
+// 		tag: gifTags.fail,
+// 		type: "random",
+// 		rating: "pg-13"
+// 	};
+// 	let gifURL = encodeURI(
+// 		giphy.baseURL + giphy.type + "?api_key=" + giphy.key + "&tag=" + giphyTag.funny
+// 	);
+
+// 	async function getAsyncURL(url) {
+// 		try {
+// 			const res = await fetch(url);
+// 			const data = await res.json();
+// 			bot.sendDocument(id, data.data.images.downsized_large.url);
+// 		} catch (err) {
+// 			console.log(err);
+// 		}
+// 	}
+// 	getAsyncURL(gifURL);
+// });
