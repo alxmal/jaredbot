@@ -132,15 +132,11 @@ bot.onText(/\/gifme/, msg => {
 	let keyboardStr = JSON.stringify({
 		inline_keyboard: [
 			[
-				[
-					{ text: "😂 Смешную", callback_data: "funny" },
-					{ text: "🤦‍ Фэйл", callback_data: "fail" }
-				],
-				[
-					{ text: "😼 Котэ", callback_data: "cats" },
-					{ text: "🤔 Мемас", callback_data: "memes" }
-				],
-				[{ text: "🎲 Рандом", callback_data: "random" }]
+				{ text: "😂", callback_data: "funny" },
+				{ text: "🤦‍", callback_data: "fail" },
+				{ text: "😼", callback_data: "cats" },
+				{ text: "🤔", callback_data: "memes" },
+				{ text: "🎲", callback_data: "random" }
 			]
 		]
 	});
