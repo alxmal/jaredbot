@@ -184,7 +184,7 @@ async function getAsyncURL(url, chatId) {
 	try {
 		const res = await fetch(url);
 		const data = await res.json();
-		bot.sendDocument(id, data.data.images.downsized_large.url);
+		bot.sendDocument(chatId, data.data.images.downsized_large.url);
 	} catch (err) {
 		console.log(err);
 	}
