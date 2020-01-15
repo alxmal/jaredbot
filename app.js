@@ -13,7 +13,7 @@ const bot = new Telegraf(TOKEN)
 bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 
 // Set telegram webhook
-bot.telegram.setWebhook('https://----.localtunnel.me/secret-path')
+bot.telegram.setWebhook('https://167.172.145.222/secret-path')
 
 app.get('/', (req, res) => {
 	res.send('Hello World!')
