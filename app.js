@@ -30,6 +30,7 @@ app.listen(PORT, () => {
 	console.log(TOKEN)
 	console.log(PORT)
 	console.log(URL)
+	console.log(require('dotenv').config())
 })
 
 /////* Планировщик задач *////
