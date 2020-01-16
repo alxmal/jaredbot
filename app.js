@@ -12,17 +12,12 @@ const app = express();
 const bot = new Telegraf(TOKEN);
 
 // Set telegram webhook
+app.use(bot.webhookCallback(`/${TOKEN}`));
 bot.telegram.setWebhook(`${URL}/${TOKEN}`);
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
 });
-
-bot.hears("Нет", ctx => {
-	ctx.reply("Путина ответ.");
-});
-
-bot.hears("Search", ctx => ctx.reply("Yay!"));
 
 const startMsg = `
 	Привет. Это Jared Bot version ${pkg.version}
@@ -37,7 +32,6 @@ bot.command("echo", ctx => {
 	ctx.reply(msg);
 });
 
-app.use(bot.webhookCallback(`/${TOKEN}`));
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
