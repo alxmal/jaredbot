@@ -19,7 +19,7 @@ bot.on("message", ctx => {
 	console.log(ctx.message.text);
 });
 
-app.hears("hi", ctx => {
+bot.hears("hi", ctx => {
 	return ctx.reply("Hey!");
 });
 
