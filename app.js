@@ -13,21 +13,28 @@ const bot = new Telegraf(TOKEN);
 // bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 
 // Set telegram webhook
-bot.telegram.setWebhook(`${URL}/${TOKEN}`)
+bot.telegram.setWebhook(`${URL}/${TOKEN}`);
+app.use(bot.webhookCallback(`/${TOKEN}`));
 
-app.use(bot.webhookCallback(`/${TOKEN}`))
+bot.on("message", msg => {
+	const {
+		chat: { id }
+	} = msg;
+	console.log(msg);
+});
 
-app.get('/', (req, res) => {
-	res.send('Hello World!')
-})
+
+app.get("/", (req, res) => {
+	res.send("Hello World!");
+});
 
 app.post(`/${TOKEN}`, (req, res) => {
-	console.log(req)
-})
+	console.log(req);
+});
 
 app.listen(PORT, () => {
-	console.log(`Jared Bot Server listening on port ${PORT}!`)
-})
+	console.log(`Jared Bot Server listening on port ${PORT}!`);
+});
 
 /////* Планировщик задач *////
 // let morningGreetJob = new CronJob({
