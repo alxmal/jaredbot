@@ -15,7 +15,7 @@ bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 // Set telegram webhook
 bot.telegram.setWebhook(`${URL}/${TOKEN}`)
 
-app.use(bot.webhookCallback(`${TOKEN}`))
+app.use(bot.webhookCallback(`/${TOKEN}`))
 
 app.get('/', (req, res) => {
 	res.send('Hello World!')
