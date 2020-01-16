@@ -17,7 +17,6 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
-	return ctx.reply(ctx.message.text)
 });
 
 bot.catch((err, ctx) => {
