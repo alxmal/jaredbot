@@ -27,6 +27,9 @@ app.post(`/${TOKEN}`, (req, res) => {
 
 app.listen(PORT, () => {
 	console.log(`Jared Bot Server listening on port ${PORT}!`)
+	console.log(TOKEN)
+	console.log(PORT)
+	console.log(URL)
 })
 
 /////* Планировщик задач *////
