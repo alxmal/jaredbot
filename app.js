@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 })
 
 app.post(`/${TOKEN}`, (req, res) => {
-	console.log(req.message)
+	console.log(req)
 })
 
 app.listen(PORT, () => {
