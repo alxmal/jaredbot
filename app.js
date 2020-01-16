@@ -3,48 +3,26 @@ const Telegraf = require("telegraf");
 const express = require("express");
 const CronJob = require("cron").CronJob;
 
-const TOKEN = process.env.BOT_TOKEN;
-const PORT = process.env.PORT;
+const TOKEN = process.env.BOT_TOKEN || "";
+const PORT = process.env.PORT || 5000;
+const URL = process.env.URL || "https://alxm.space/";
 
 const app = express();
-
 const bot = new Telegraf(TOKEN);
 
-app.get("/", function(req, res) {
-	res.send("Hello World!");
-});
+bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 
-app.listen(5000, function() {
-	console.log("Example app listening on port 5000!");
-});
+// Set telegram webhook
+bot.telegram.setWebhook(`${URL}/${TOKEN}`)
 
-// bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
+app.use(bot.webhookCallback(`${TOKEN}`))
 
-// // Set telegram webhook
-// bot.telegram.setWebhook('https://alxm.space/jared')
-
-// app.get('/', (req, res) => {
-// 	res.send('Hello World!')
-// })
-// app.use(bot.webhookCallback('/jared'))
-// app.listen(PORT, () => {
-// 	console.log(`Example app listening on port ${PORT}!`)
-// })
-
-// Настроить nginx прокси на порт 3000
-
-// router.post("/bot", ctx => {
-// 	const { body } = ctx.request;
-// 	bot.processUpdate(body);
-// 	ctx.status = 200;
-// });
-
-// app.use(bodyParser());
-// app.use(router.routes());
-
-// app.listen(PORT, () => {
-// 	console.log(`Listening on ${PORT}`);
-// });
+app.get('/', (req, res) => {
+	res.send('Hello World!')
+})
+app.listen(PORT, () => {
+	console.log(`Jared Bot Server listening on port ${PORT}!`)
+})
 
 /////* Планировщик задач *////
 // let morningGreetJob = new CronJob({
