@@ -26,10 +26,11 @@ const startMsg = `
 
 bot.command("start", ctx => ctx.reply(startMsg));
 bot.command("echo", ctx => {
-	const msg = ctx.message.text
-		.replace("/echo", "")
-		.replace("@JaredTheScrumMasterBot", "");
-	ctx.reply(msg);
+	// const msg = ctx.message.text
+	// 	.replace("/echo", "")
+	// 	.replace("@JaredTheScrumMasterBot", "");
+	// ctx.reply(msg);
+	console.log('echo')
 });
 
 app.get("/", (req, res) => {
