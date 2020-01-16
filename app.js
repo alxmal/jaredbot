@@ -17,11 +17,9 @@ bot.telegram.setWebhook(`${URL}/${TOKEN}`);
 app.use(bot.webhookCallback(`/${TOKEN}`));
 
 bot.on("message", msg => {
-	const {
-		chat: { id }
-	} = msg;
-	console.log(msg);
+	console.log(msg.update);
 });
+
 bot.hears("Нет", ctx => {
 	return ctx.reply("Путина ответ.")
 })
