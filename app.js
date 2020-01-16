@@ -22,7 +22,9 @@ bot.on("message", msg => {
 	} = msg;
 	console.log(msg);
 });
-
+bot.hears("Нет", ctx => {
+	return ctx.reply("Путина ответ.")
+})
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");
