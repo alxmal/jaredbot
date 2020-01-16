@@ -19,6 +19,10 @@ bot.on("message", ctx => {
 	console.log(ctx.message.text);
 });
 
+app.hears("hi", ctx => {
+	return ctx.reply("Hey!");
+});
+
 bot.catch((err, ctx) => {
 	console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
 });
@@ -26,6 +30,7 @@ bot.catch((err, ctx) => {
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
+
 app.listen(PORT, () => {
 	console.log(`Jared Bot Server listening on port ${PORT}!`);
 });
