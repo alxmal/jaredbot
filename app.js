@@ -19,7 +19,7 @@ bot.on("message", ctx => {
 });
 
 bot.hears("Нет", ctx => {
-	return ctx.reply("Путина ответ.");
+	ctx.reply("Путина ответ.");
 });
 
 bot.hears("Search", ctx => ctx.reply("Yay!"));
@@ -29,12 +29,12 @@ const startMsg = `
 	Пиши /help для списка команд.
 `;
 
-bot.command("/start", ctx => ctx.reply(startMsg));
-bot.command("/echo", ctx => {
+bot.command("start", ctx => ctx.reply(startMsg));
+bot.command("echo", ctx => {
 	const msg = ctx.message.text
 		.replace("/echo", "")
 		.replace("@JaredTheScrumMasterBot", "");
-	return ctx.reply(msg);
+	ctx.reply(msg);
 });
 
 app.use(bot.webhookCallback(`/${TOKEN}`));
