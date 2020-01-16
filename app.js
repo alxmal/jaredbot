@@ -1,6 +1,6 @@
-require('dotenv').config()
-const Telegraf = require("telegraf")
-const express = require("express")
+require("dotenv").config();
+const Telegraf = require("telegraf");
+const express = require("express");
 const config = require("config");
 const CronJob = require("cron").CronJob;
 
@@ -9,20 +9,28 @@ const PORT = process.env.PORT;
 
 const app = express();
 
-const bot = new Telegraf(TOKEN)
-bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
+const bot = new Telegraf(TOKEN);
 
-// Set telegram webhook
-bot.telegram.setWebhook('https://alxm.space/jared')
+app.get("/", function(req, res) {
+	res.send("Hello World!");
+});
 
-app.get('/', (req, res) => {
-	res.send('Hello World!')
-})
-app.use(bot.webhookCallback('/jared'))
-app.listen(PORT, () => {
-	console.log(`Example app listening on port ${PORT}!`)
-})
+app.listen(5000, function() {
+	console.log("Example app listening on port 5000!");
+});
 
+// bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
+
+// // Set telegram webhook
+// bot.telegram.setWebhook('https://alxm.space/jared')
+
+// app.get('/', (req, res) => {
+// 	res.send('Hello World!')
+// })
+// app.use(bot.webhookCallback('/jared'))
+// app.listen(PORT, () => {
+// 	console.log(`Example app listening on port ${PORT}!`)
+// })
 
 // Настроить nginx прокси на порт 3000
 
