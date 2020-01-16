@@ -20,6 +20,11 @@ app.use(bot.webhookCallback(`${TOKEN}`))
 app.get('/', (req, res) => {
 	res.send('Hello World!')
 })
+
+app.post(`/${TOKEN}`, (req, res) => {
+	console.log(req.message)
+})
+
 app.listen(PORT, () => {
 	console.log(`Jared Bot Server listening on port ${PORT}!`)
 })
