@@ -12,8 +12,8 @@ const app = express();
 const bot = new Telegraf(TOKEN);
 
 // Set telegram webhook
-app.use(bot.webhookCallback(`/${TOKEN}`));
-bot.telegram.setWebhook(`${URL}/${TOKEN}`);
+app.use(bot.webhookCallback(`/bot${TOKEN}`));
+bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
