@@ -24,13 +24,16 @@ const startMsg = `
 	Пиши /help для списка команд.
 `;
 
-bot.command("start", ctx => ctx.reply(startMsg));
+bot.command("start", async ctx => {
+	await ctx.reply(startMsg);
+});
+
 bot.command("echo", ctx => {
 	// const msg = ctx.message.text
 	// 	.replace("/echo", "")
 	// 	.replace("@JaredTheScrumMasterBot", "");
 	// ctx.reply(msg);
-	console.log('echo')
+	console.log("echo");
 });
 
 app.get("/", (req, res) => {
