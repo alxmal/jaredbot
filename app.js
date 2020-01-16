@@ -10,20 +10,20 @@ const URL = process.env.URL;
 const app = express();
 const bot = new Telegraf(TOKEN);
 
-bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
+// bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 
-// Set telegram webhook
-bot.telegram.setWebhook(`${URL}/${TOKEN}`)
+// // Set telegram webhook
+// bot.telegram.setWebhook(`${URL}/${TOKEN}`)
 
-app.use(bot.webhookCallback(`${TOKEN}`))
+// app.use(bot.webhookCallback(`${TOKEN}`))
 
-app.get('/', (req, res) => {
-	res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+// 	res.send('Hello World!')
+// })
 
-app.post(`/${TOKEN}`, (req, res) => {
-	console.log(req.message)
-})
+// app.post(`/${TOKEN}`, (req, res) => {
+// 	console.log(req.message)
+// })
 
 app.listen(PORT, () => {
 	console.log(`Jared Bot Server listening on port ${PORT}!`)
