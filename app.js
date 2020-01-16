@@ -1,7 +1,6 @@
 require("dotenv").config();
 const Telegraf = require("telegraf");
 const express = require("express");
-const config = require("config");
 const CronJob = require("cron").CronJob;
 
 const TOKEN = process.env.BOT_TOKEN;
