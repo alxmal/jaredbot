@@ -17,20 +17,7 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
-});
-
-const startMsg = `
-	Привет. Это Jared Bot version ${pkg.version}
-	Пиши /help для списка команд.
-`;
-
-bot.command("start", ctx => ctx.reply(startMsg));
-bot.command("echo", ctx => {
-	// const msg = ctx.message.text
-	// 	.replace("/echo", "")
-	// 	.replace("@JaredTheScrumMasterBot", "");
-	// ctx.reply(msg);
-	console.log("echo");
+	return ctx.reply(ctx.message.text)
 });
 
 bot.catch((err, ctx) => {
