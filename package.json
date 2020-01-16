@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "babel-node app.js --presets=env"
+    "start": "pm2 start app.js"
   },
   "keywords": [],
   "author": "",

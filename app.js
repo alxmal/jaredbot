@@ -13,15 +13,18 @@ const bot = new Telegraf(TOKEN)
 bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 
 // Set telegram webhook
-bot.telegram.setWebhook('https://167.172.145.222/secret-path')
+bot.telegram.setWebhook('https://alxm.space/jared')
 
 app.get('/', (req, res) => {
 	res.send('Hello World!')
 })
-app.use(bot.webhookCallback('/secret-path'))
+app.use(bot.webhookCallback('/jared'))
 app.listen(PORT, () => {
 	console.log(`Example app listening on port ${PORT}!`)
 })
+
+
+// Настроить nginx прокси на порт 3000
 
 // router.post("/bot", ctx => {
 // 	const { body } = ctx.request;
