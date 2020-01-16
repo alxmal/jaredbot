@@ -16,8 +16,8 @@ const bot = new Telegraf(TOKEN);
 bot.telegram.setWebhook(`${URL}/${TOKEN}`);
 app.use(bot.webhookCallback(`/${TOKEN}`));
 
-bot.on("message", msg => {
-	console.log(msg.update);
+bot.on("message", ctx => {
+	console.log(ctx.message.text);
 });
 
 bot.hears("Нет", ctx => {
