@@ -29,10 +29,12 @@ const startMsg = `
 	Пиши /help для списка команд.
 `;
 
-bot.command("/start", reply(startMsg));
-bot.command("/echo", ({ reply, message }) => {
-	const msg = message.text.replace("/echo", "").replace("@JaredTheScrumMasterBot", "");
-	reply(msg);
+bot.command("/start", ctx => ctx.reply(startMsg));
+bot.command("/echo", ctx => {
+	const msg = ctx.message.text
+		.replace("/echo", "")
+		.replace("@JaredTheScrumMasterBot", "");
+	return ctx.reply(msg);
 });
 
 app.use(bot.webhookCallback(`/${TOKEN}`));
