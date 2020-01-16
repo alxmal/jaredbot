@@ -3,9 +3,9 @@ const Telegraf = require("telegraf");
 const express = require("express");
 const CronJob = require("cron").CronJob;
 
-const TOKEN = process.env.BOT_TOKEN || "";
-const PORT = process.env.PORT || 5000;
-const URL = process.env.URL || "https://alxm.space/";
+const TOKEN = process.env.BOT_TOKEN;
+const PORT = process.env.PORT;
+const URL = process.env.URL;
 
 const app = express();
 const bot = new Telegraf(TOKEN);
