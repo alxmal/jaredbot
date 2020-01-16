@@ -2,6 +2,7 @@ require("dotenv").config();
 const Telegraf = require("telegraf");
 const express = require("express");
 const CronJob = require("cron").CronJob;
+const pkg = require("./package.json");
 
 const TOKEN = process.env.BOT_TOKEN;
 const PORT = process.env.PORT;
@@ -10,11 +11,8 @@ const URL = process.env.URL;
 const app = express();
 const bot = new Telegraf(TOKEN);
 
-// bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
-
 // Set telegram webhook
 bot.telegram.setWebhook(`${URL}/${TOKEN}`);
-app.use(bot.webhookCallback(`/${TOKEN}`));
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
@@ -24,16 +22,23 @@ bot.hears("Нет", ctx => {
 	return ctx.reply("Путина ответ.");
 });
 
-bot.hears("🔍 Search", ctx => ctx.reply("Yay!"));
+bot.hears("Search", ctx => ctx.reply("Yay!"));
 
+const startMsg = `
+	Привет. Это Jared Bot version ${pkg.version}
+	Пиши /help для списка команд.
+`;
+
+bot.command("/start", reply(startMsg));
+bot.command("/echo", ({ reply, message }) => {
+	const msg = message.text.replace("/echo", "").replace("@JaredTheScrumMasterBot", "");
+	reply(msg);
+});
+
+app.use(bot.webhookCallback(`/${TOKEN}`));
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
-
-app.post(`/${TOKEN}`, (req, res) => {
-	console.log(req);
-});
-
 app.listen(PORT, () => {
 	console.log(`Jared Bot Server listening on port ${PORT}!`);
 });
