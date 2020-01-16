@@ -10,7 +10,7 @@ const URL = process.env.URL;
 const app = express();
 const bot = new Telegraf(TOKEN);
 
-bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
+// bot.on('text', ({ replyWithHTML }) => replyWithHTML('<b>Hello</b>'))
 
 // Set telegram webhook
 bot.telegram.setWebhook(`${URL}/${TOKEN}`)
