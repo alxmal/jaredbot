@@ -24,16 +24,17 @@ const startMsg = `
 	Пиши /help для списка команд.
 `;
 
-bot.command("start", async ctx => {
-	await ctx.reply(startMsg);
-});
-
+bot.command("start", ctx => ctx.reply(startMsg));
 bot.command("echo", ctx => {
 	// const msg = ctx.message.text
 	// 	.replace("/echo", "")
 	// 	.replace("@JaredTheScrumMasterBot", "");
 	// ctx.reply(msg);
 	console.log("echo");
+});
+
+bot.catch((err, ctx) => {
+	console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
 });
 
 app.get("/", (req, res) => {
