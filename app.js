@@ -21,8 +21,10 @@ bot.on("message", msg => {
 });
 
 bot.hears("Нет", ctx => {
-	return ctx.reply("Путина ответ.")
-})
+	return ctx.reply("Путина ответ.");
+});
+
+bot.hears("🔍 Search", ctx => ctx.reply("Yay!"));
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");
