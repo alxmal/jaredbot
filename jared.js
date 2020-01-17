@@ -1,4 +1,5 @@
 const Telegraf = require("telegraf");
+const axios = require("axios").default;
 
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
@@ -25,9 +26,46 @@ bot.mention("JaredTheScrumMasterBot", async ctx => {
 	await ctx.reply(getMessage());
 });
 
-bot.on("inline_query", async ctx => {
-	let query = ctx.update.inline_query.query;
-	console.log(query);
+// bot.on("inline_query", async ctx => {
+// 	let query = ctx.update.inline_query.query;
+// 	console.log(query);
+
+// 	if (query.startsWith("/")) {
+// 		if (query.startsWith("/help")) {
+// 			console.log("HELP");
+// 			ctx.reply("Джаред помогает.");
+// 		}
+// 	}
+// });
+
+bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
+	try {
+		const apiUrl = `http://recipepuppy.com/api/?q=${inlineQuery.query}`;
+		const response = await axios.get(apiUrl);
+		const { results } = await response.json();
+		const recipes = results
+			.filter(({ thumbnail }) => thumbnail)
+			.map(({ title, href, thumbnail }) => ({
+				type: "article",
+				id: thumbnail,
+				title: title,
+				description: title,
+				thumb_url: thumbnail,
+				input_message_content: {
+					message_text: title
+				},
+				reply_markup: Markup.inlineKeyboard([
+					Markup.urlButton("Go to recipe", href)
+				])
+			}));
+		return answerInlineQuery(recipes);
+	} catch (error) {
+		console.error(error);
+	}
+});
+
+bot.on("chosen_inline_result", ({ chosenInlineResult }) => {
+	console.log("chosen inline result", chosenInlineResult);
 });
 
 bot.command("gifme", async ctx => await ctx.reply("Gif posted."));
