@@ -19,8 +19,8 @@ bot.on("message", ctx => {
 	console.log(ctx.message.text);
 });
 
-bot.hears("hi", ctx => {
-	return ctx.reply("Hey!");
+bot.hears("hi", async ctx => {
+	await ctx.reply("Hey!");
 });
 
 bot.catch((err, ctx) => {
