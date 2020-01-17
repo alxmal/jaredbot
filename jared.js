@@ -1,5 +1,5 @@
 const Telegraf = require("telegraf");
-const Markup = require('telegraf/markup')
+const Markup = require("telegraf/markup");
 const axios = require("axios");
 
 const TOKEN = process.env.BOT_TOKEN;
@@ -13,6 +13,17 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 bot.hears(["hi", "привет", "Привет"], async ctx => {
 	const username = ctx.message.from.username;
 	await ctx.reply(`Привет ${username}`);
+});
+
+bot.hears(/\/wrap (\d+)/, ctx => {
+	return ctx.reply(
+		"Keyboard wrap",
+		Extra.markup(
+			Markup.keyboard(["one", "two", "three", "four", "five", "six"], {
+				columns: parseInt(ctx.match[1])
+			})
+		)
+	);
 });
 
 bot.mention("JaredTheScrumMasterBot", async ctx => {
