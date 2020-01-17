@@ -1,5 +1,5 @@
 const Telegraf = require("telegraf");
-const axios = require("axios").default;
+// const axios = require("axios").default;
 
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;

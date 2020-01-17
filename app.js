@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const axios = require("axios").default;
 const CronJob = require("cron").CronJob;
 const pkg = require("./package.json");
 
