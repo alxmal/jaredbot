@@ -25,7 +25,7 @@ bot.mention("JaredTheScrumMasterBot", async ctx => {
 	await ctx.reply(getMessage());
 });
 
-bot.inlineQuery("gifme", async ctx => await ctx.reply("Gif posted."));
+bot.command("gifme", async ctx => await ctx.reply("Gif posted."));
 
 bot.on("inline_query", async ctx => {
 	let query = ctx.update.inline_query.query;
