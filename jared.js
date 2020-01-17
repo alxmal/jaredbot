@@ -7,14 +7,11 @@ const bot = new Telegraf(TOKEN);
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Bot actions
-bot.on("text", ctx => {
-	ctx.message.text === "hi";
-	ctx.reply("Hey");
+bot.on("message", ctx => {
+	console.log(ctx.message.text);
 });
 
-bot.command("gifme", ctx => {
-	return ctx.reply("Gif posted.");
-});
+bot.command('gifme', (ctx) => ctx.reply('Gif posted.'))
 
 bot.hears("hi", async ctx => {
 	await ctx.reply("Hey!");
