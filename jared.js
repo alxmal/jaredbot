@@ -30,7 +30,7 @@ bot.on("inline_query", async ctx => {
 	console.log(query);
 });
 
-bot.inlineQuery("gifme", async ctx => await ctx.reply("Gif posted."));
+bot.inlineQuery("gifme", async ctx => await ctx.answerInlineQuery("Gif posted."));
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
