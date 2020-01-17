@@ -8,7 +8,7 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Bot actions
 bot.on("text", ctx => {
-	ctx.message.text == "hi";
+	ctx.message.text === "hi";
 	ctx.reply("Hey");
 });
 
