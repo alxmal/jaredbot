@@ -11,8 +11,8 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 bot.inlineQuery("gifme", ctx => ctx.reply("Gif posted."));
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
-	console.log(ctx);
-	await ctx.reply("Привет");
+	const username = ctx.message.from.username;
+	await ctx.reply(`Привет ${username}`);
 });
 
 bot.mention("JaredTheScrumMasterBot", ctx => {
