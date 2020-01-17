@@ -1,4 +1,5 @@
 const Telegraf = require("telegraf");
+const Markup = require('telegraf/markup')
 const axios = require("axios");
 
 const TOKEN = process.env.BOT_TOKEN;
@@ -43,7 +44,7 @@ bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
 		const apiUrl = `http://recipepuppy.com/api/?q=${inlineQuery.query}`;
 		const response = await axios.get(apiUrl);
 		const { results } = await response.data;
-		
+
 		console.log(results);
 
 		const recipes = results
