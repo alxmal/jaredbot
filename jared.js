@@ -7,9 +7,9 @@ const bot = new Telegraf(TOKEN);
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Bot actions
-bot.on("message", ctx => {
-	console.log(ctx.message.text);
-});
+// bot.on("message", ctx => {
+// 	console.log(ctx.message.text);
+// });
 
 bot.command('gifme', (ctx) => ctx.reply('Gif posted.'))
 
