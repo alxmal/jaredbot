@@ -1,38 +1,21 @@
 require("dotenv").config();
-const Telegraf = require("telegraf");
 const express = require("express");
 const CronJob = require("cron").CronJob;
 const pkg = require("./package.json");
 
-const TOKEN = process.env.BOT_TOKEN;
 const PORT = process.env.PORT;
-const URL = process.env.URL;
-
 const app = express();
-const bot = new Telegraf(TOKEN);
 
-// Set telegram webhook
-app.use(bot.webhookCallback(`/bot${TOKEN}`));
-bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
-
-bot.on("message", ctx => {
-	console.log(ctx.message.text);
-});
-
-bot.hears("hi", async ctx => {
-	await ctx.reply("Hey!");
-});
-
-bot.catch((err, ctx) => {
-	console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
-});
+// Load bot
+const jared = require("./jared")
+app.use(jared)
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
 
 app.listen(PORT, () => {
-	console.log(`Jared Bot Server listening on port ${PORT}!`);
+	console.log(`Jared Bot version ${pkg.version} running on port ${PORT}!`);
 });
 
 /////* Планировщик задач *////
