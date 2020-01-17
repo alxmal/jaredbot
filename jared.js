@@ -8,19 +8,28 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Bot actions
 
-bot.inlineQuery("gifme", ctx => ctx.reply("Gif posted."));
+bot.inlineQuery("gifme", async ctx => await ctx.reply("Gif posted."));
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
 	const username = ctx.message.from.username;
 	await ctx.reply(`Привет ${username}`);
 });
 
-bot.mention("JaredTheScrumMasterBot", ctx => {
-	ctx.reply("Что? Нихуя не понимаю... 🤷‍♂️");
+bot.mention("JaredTheScrumMasterBot", async ctx => {
+	let answers = [
+		"Что? Нихуя не понимаю... 🤷‍♂️",
+		"Вгляните на меня, я являюсь частью чего-то доселе невиданного!",
+		"Лесбиянство арахисового масла",
+		"Как насчёт загадки?"
+	];
+	const getMessage = () =>
+		answers[Math.floor(Math.random() * answers.length)];
+	await ctx.reply(getMessage());
 });
 
-bot.on("inline_query", ctx => {
+bot.on("inline_query", async ctx => {
 	let query = ctx.update.inline_query.query;
+	console.log(query);
 });
 
 bot.on("message", ctx => {
