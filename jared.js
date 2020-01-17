@@ -21,4 +21,4 @@ bot.catch((err, ctx) => {
 	console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
 });
 
-module.exports = app.use(bot.webhookCallback(`/bot${TOKEN}`));
+module.exports = bot.webhookCallback(`/bot${TOKEN}`);
