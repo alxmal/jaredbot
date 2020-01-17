@@ -42,8 +42,8 @@ bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
 	try {
 		const apiUrl = `http://recipepuppy.com/api/?q=${inlineQuery.query}`;
 		const response = await axios.get(apiUrl);
-		console.log(response);
 		const { results } = await response;
+		console.log(response).results;
 		const recipes = results
 			.filter(({ thumbnail }) => thumbnail)
 			.map(({ title, href, thumbnail }) => ({
