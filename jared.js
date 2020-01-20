@@ -20,7 +20,8 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 bot.command("help@JaredTheScrumMasterBot", async ctx => {
 	const chatId = await ctx.chat.id;
 	const result = await ctx.replyWithAnimation(
-		"CgADBAADNAAD7RwMUBW9prtZ3mchFgQ", {caption: "Пишите – Эй, Джаред"}
+		"CgADBAADNAAD7RwMUBW9prtZ3mchFgQ",
+		{ caption: "Пишите – Эй, Джаред" }
 	);
 	return result;
 });
@@ -51,14 +52,16 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 		let birthdayList = "";
 		arr.forEach(item => {
 			let itemDateFormatted = moment(item[2]).format("YYYY-MM-DD"),
-			now = moment().format("YYYY-MM-DD"),
-			isAfter = moment(itemDateFormatted).isAfter(now),
-			listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
-				item[2]
-			).format("dddd Do MMMM")} \n ---------- \n`;
+				now = moment().format("YYYY-MM-DD"),
+				isAfter = moment(itemDateFormatted).isAfter(now),
+				listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
+					item[2]
+				).format("dddd Do MMMM")} \n ---------- \n`;
 			listBeforeRow = `<i>${item[0]}</i> ${item[1]} – <s>${moment(
 				item[2]
 			).format("dddd Do MMMM")}</s> \n ---------- \n`;
+
+			console.log(now);
 
 			birthdayList += isAfter ? listAfterRow : listBeforeRow;
 		});
