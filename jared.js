@@ -7,7 +7,7 @@ moment.locale("ru");
 
 const bdays = require("./bdays");
 
-let sortedBdays = bdays.slice().sort((a, b) => moment(b[2]) - moment(a[2]));
+let sortedBdays = bdays.slice().sort((a, b) => moment(a[2]) - moment(b[2]));
 
 console.log(sortedBdays)
 
