@@ -7,7 +7,7 @@ moment.locale("ru");
 
 const bdays = require("./bdays");
 
-let sortedBdaysArr = bdays.sort((a, b) => a[2] > b[2]);
+let sortedBdaysArr = bdays.sort((a, b) => a[2] - b[2]);
 
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
