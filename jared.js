@@ -25,8 +25,8 @@ bot.hears(["hi", "привет", "Привет"], async ctx => {
 	return result;
 });
 
-bot.hears(["Эй, Джаред"], async ({ reply }) => {
-	const username = await ctx.message.from.username;
+bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
+	const username = await message.from.username;
 	const result = await reply(
 		`Чем могу помочь ${username}?`,
 		Markup.keyboard([
