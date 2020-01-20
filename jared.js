@@ -78,7 +78,7 @@ bot.hears("🎁 У кого следующая днюха?", ctx => {
 		return arr.map(item => {
 			let now = moment(moment().format("MM-DD")),
 				bday = moment(moment(item[2]).format("MM-DD"));
-			return now.diff(bday, "days");
+			return bday.diff(now, "days");
 		});
 	};
 
