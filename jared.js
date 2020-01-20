@@ -63,7 +63,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 					item[2]
 				).format("dddd Do MMMM")}</s> \n ---------- \n`;
 
-			// console.log(now, isAfter);
+			console.log(now, isAfter);
 
 			birthdayList += isAfter ? listAfterRow : listBeforeRow;
 		});
@@ -75,23 +75,18 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 
 bot.hears("🎁 У кого следующая днюха?", ctx => {
 	const getNearestDateIndex = arr => {
-		let result = [];
-		arr.map(item => {
-			let now = moment(),
-				bday = moment(item[2]),
-				diff = now.diff(bday, "days");
-			// console.log(now, bday);
-			// console.log(diff)
-			result.push(diff);
+		return arr.map(item => {
+			let now = moment(moment().format("MM-DD")),
+				bday = moment(moment(item[2]).format("MM-DD"));
+			return now.diff(bday, "days");
 		});
-		return result;
 	};
 
-	let diffIdxArr = getNearestDateIndex(sortedBdays),
-		nearestIdx = diffIdxArr.indexOf(Math.max(...diffIdxArr)),
-		nextBday = sortedBdays[nearestIdx];
+	let diffIdxArr = getNearestDateIndex(sortedBdays);
 
-	ctx.reply(`🎉 Скоро день рождения у ${nextBday[0]}`);
+	console.log(diffIdxArr);
+
+	ctx.reply("🎉 Скоро день рождения у юзер2");
 });
 
 bot.mention("JaredTheScrumMasterBot", async ctx => {
