@@ -21,9 +21,8 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 bot.command("help@JaredTheScrumMasterBot", async ctx => {
 	const chatId = await ctx.chat.id;
-	console.log(chatId);
 	const result = await ctx.replyWithAnimation(
-		"CgADBAADNAAD7RwMUBW9prtZ3mchFgQ"
+		"CgADBAADNAAD7RwMUBW9prtZ3mchFgQ", {caption: "Пишите – Эй, Джаред"}
 	);
 	return result;
 });
@@ -94,38 +93,38 @@ bot.mention("JaredTheScrumMasterBot", async ctx => {
 // 	}
 // });
 
-bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
-	try {
-		const apiUrl = `http://recipepuppy.com/api/?q=${inlineQuery.query}`;
-		const response = await axios.get(apiUrl);
-		const { results } = await response.data;
+// bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
+// 	try {
+// 		const apiUrl = `http://recipepuppy.com/api/?q=${inlineQuery.query}`;
+// 		const response = await axios.get(apiUrl);
+// 		const { results } = await response.data;
 
-		console.log(results);
+// 		console.log(results);
 
-		const recipes = results
-			.filter(({ thumbnail }) => thumbnail)
-			.map(({ title, href, thumbnail }) => ({
-				type: "article",
-				id: thumbnail,
-				title: title,
-				description: title,
-				thumb_url: thumbnail,
-				input_message_content: {
-					message_text: title
-				},
-				reply_markup: Markup.inlineKeyboard([
-					Markup.urlButton("Go to recipe", href)
-				])
-			}));
-		return answerInlineQuery(recipes);
-	} catch (error) {
-		console.error(error);
-	}
-});
+// 		const recipes = results
+// 			.filter(({ thumbnail }) => thumbnail)
+// 			.map(({ title, href, thumbnail }) => ({
+// 				type: "article",
+// 				id: thumbnail,
+// 				title: title,
+// 				description: title,
+// 				thumb_url: thumbnail,
+// 				input_message_content: {
+// 					message_text: title
+// 				},
+// 				reply_markup: Markup.inlineKeyboard([
+// 					Markup.urlButton("Go to recipe", href)
+// 				])
+// 			}));
+// 		return answerInlineQuery(recipes);
+// 	} catch (error) {
+// 		console.error(error);
+// 	}
+// });
 
-bot.on("chosen_inline_result", ({ chosenInlineResult }) => {
-	console.log("chosen inline result", chosenInlineResult);
-});
+// bot.on("chosen_inline_result", ({ chosenInlineResult }) => {
+// 	console.log("chosen inline result", chosenInlineResult);
+// });
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
