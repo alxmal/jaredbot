@@ -52,7 +52,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 		let birthdayList = "";
 		arr.forEach(item => {
 			let now = moment().format("YYYY-MM-DD"),
-				isAfter = moment(item[2]).isAfter(now),
+				isAfter = moment(item[2]).isAfter(now, 'month'),
 				listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
 					item[2]
 				).format("dddd Do MMMM")} \n ---------- \n`,
