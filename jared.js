@@ -76,9 +76,9 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 bot.hears("🎁 У кого следующая днюха?", ctx => {
 	const getNearestDateIndex = arr => {
 		arr.map(item => {
-			moment()
-				.format("MM-DD")
-				.diff(moment(item[2]).format("MM-DD"));
+			let now = moment().format("MM-DD"),
+				bday = moment(item[2]).format("MM-DD");
+			return now.diff(bday, "days");
 		});
 	};
 
