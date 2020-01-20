@@ -44,12 +44,11 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 bot.hears("🥳 Покажи список дней рождения", async ctx => {
 	const getList = arr => {
 		let birthdayList = "";
-		let result = arr.forEach(item => {
+		arr.forEach(item => {
 			let listRow = `<b>${item[0]}</b> – ${item[1]} `;
 			birthdayList += listRow;
 		});
-		console.log(birthdayList);
-		return result;
+		return birthdayList;
 	};
 
 	// let bdListHtml = await getList(bdays);
