@@ -40,7 +40,7 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 	return result;
 });
 
-bot.action(showBirthDaysList, ctx => ctx.reply(
+bot.action('showBirthDaysList', ctx => ctx.reply(
 	`user 1 - dd.mm
 	user 2 - dd.mm
 	user 3 - dd.mm
