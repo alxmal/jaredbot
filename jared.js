@@ -9,8 +9,6 @@ const bdays = require("./bdays");
 
 let sortedBdays = bdays.slice().sort((a, b) => moment(a[2]) - moment(b[2]));
 
-console.log(sortedBdays)
-
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
 const bot = new Telegraf(TOKEN);
@@ -52,11 +50,17 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 	const getList = arr => {
 		let birthdayList = "";
 		arr.forEach(item => {
-			let listRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
+			let itemDateFormatted = moment(item[2]).format("YYYY-MM-DD"),
+			now = moment().format("YYYY-MM-DD"),
+			isAfter = moment(itemDateFormatted).isAfter(now),
+			listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
 				item[2]
 			).format("dddd Do MMMM")} \n ---------- \n`;
+			listBeforeRow = `<i>${item[0]}</i> ${item[1]} – <s>${moment(
+				item[2]
+			).format("dddd Do MMMM")}</s> \n ---------- \n`;
 
-			birthdayList += listRow;
+			birthdayList += isAfter ? listAfterRow : listBeforeRow;
 		});
 		return birthdayList;
 	};
@@ -65,7 +69,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 });
 
 bot.hears("🎁 У кого следующая днюха?", ctx => {
-	console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
+	let
 	ctx.reply("Скоро день рождения у юзер2");
 });
 
