@@ -1,5 +1,5 @@
 const Telegraf = require("telegraf");
-const Extra = require('telegraf/extra')
+const Extra = require("telegraf/extra");
 const Markup = require("telegraf/markup");
 const axios = require("axios");
 
@@ -11,7 +11,10 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Bot actions
 
-bot.command("gifme@JaredTheScrumMasterBot", async ctx => await ctx.reply("Gif posted."));
+bot.command("help@JaredTheScrumMasterBot", async ctx => {
+	let chatId = ctx.message.chat.id;
+	await ctx.sendAnimation(chatId, 'CgADBAADNAAD7RwMUBW9prtZ3mchFgQ');
+});
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
 	const username = ctx.message.from.username;
