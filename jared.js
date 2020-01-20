@@ -55,14 +55,11 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 		return birthdayList;
 	};
 
-	// let bdListHtml = await getList(bdays);
-	console.log(now);
-
 	return ctx.replyWithHTML(getList(bdays));
 });
 
 bot.hears("🎁 У кого следующая днюха?", ctx => {
-	console.log(moment().format());
+	console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
 	ctx.reply("Скоро день рождения у юзер2");
 });
 
