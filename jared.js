@@ -7,6 +7,8 @@ moment.locale("ru");
 
 const bdays = require("./bdays");
 
+let sortedBdaysArr = bdays.sort((a, b) => a[2] > b[2]);
+
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
 const bot = new Telegraf(TOKEN);
@@ -49,14 +51,16 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 	const getList = arr => {
 		let birthdayList = "";
 		arr.forEach(item => {
-			let listRow = `<b>${item[0]}</b> ${item[1]} – ${moment(item[2]).format("dddd Do MMMM")} \n ---------- \n`;
+			let listRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
+				item[2]
+			).format("dddd Do MMMM")} \n ---------- \n`;
 
 			birthdayList += listRow;
 		});
 		return birthdayList;
 	};
 
-	return ctx.replyWithHTML(getList(bdays));
+	return ctx.replyWithHTML(getList(sortedBdaysArr));
 });
 
 bot.hears("🎁 У кого следующая днюха?", ctx => {
