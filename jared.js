@@ -1,5 +1,5 @@
 const Telegraf = require("telegraf");
-const Extra = require("telegraf/extra");
+const { Extra } = Telegraf;
 const Markup = require("telegraf/markup");
 const axios = require("axios");
 
@@ -13,14 +13,17 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 bot.command("help", async ctx => {
 	const chatId = await ctx.chat.id;
-	console.log(chatId)
-	const result = await ctx.replyWithVideo(chatId, 'CgADBAADNAAD7RwMUBW9prtZ3mchFgQ');
+	console.log(chatId);
+	const result = await ctx.replyWithAnimation(
+		chatId,
+		"https://media.giphy.com/media/ya4eevXU490Iw/giphy.gif"
+	);
 	return result;
 });
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
 	const username = await ctx.message.from.username;
-	const result  = await ctx.reply(`Привет ${username}`);
+	const result = await ctx.reply(`Привет ${username}`);
 	return result;
 });
 
