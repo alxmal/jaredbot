@@ -52,7 +52,10 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 		let birthdayList = "";
 		arr.forEach(item => {
 			let now = moment().format("MM-DD"),
-				isAfter = moment(moment(item[2]).format("MM-DD")).isAfter(now, 'month'),
+				isAfter = moment(moment(item[2]).format("MM-DD")).isAfter(
+					now,
+					"month"
+				),
 				listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
 					item[2]
 				).format("dddd Do MMMM")} \n ---------- \n`,
@@ -71,6 +74,18 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 });
 
 bot.hears("🎁 У кого следующая днюха?", ctx => {
+	const getNearestDateIndex = arr => {
+		arr.map(item => {
+			moment()
+				.format("MM-DD")
+				.diff(moment(item[2]).format("MM-DD"));
+		});
+	};
+
+	let diffIdxArr = getNearestDateIndex(sortedBdays);
+
+	console.log(diffIdxArr);
+
 	ctx.reply("🎉 Скоро день рождения у юзер2");
 });
 
