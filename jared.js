@@ -54,6 +54,8 @@ bot.hears("🥳 Покажи список дней рождения", ctx => {
 
 	let bdListHtml = getList(bdays)
 
+	console.log(bdListHtml)
+
 	ctx.replyWithHTML(bdListHtml);
 });
 
