@@ -7,7 +7,9 @@ moment.locale("ru");
 
 const bdays = require("./bdays");
 
-let sortedBdaysArr = bdays.sort((a, b) => a[2] - b[2]);
+let sortedBdays = bdays.sort((a, b) => a[2] - b[2]);
+
+console.log(sortedBdays)
 
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
@@ -60,7 +62,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 		return birthdayList;
 	};
 
-	return ctx.replyWithHTML(getList(sortedBdaysArr));
+	return ctx.replyWithHTML(getList(sortedBdays));
 });
 
 bot.hears("🎁 У кого следующая днюха?", ctx => {
