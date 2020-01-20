@@ -85,7 +85,7 @@ bot.hears("🎁 У кого следующая днюха?", ctx => {
 	let diffIdxArr = getNearestDateIndex(sortedBdays);
 
 	const indexOfSmallest = arr => {
-		return arr.indexOf(Math.min.apply(Math, a));
+		return arr.indexOf(Math.min.apply(Math, arr));
 	};
 
 	
