@@ -49,7 +49,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 			birthdayList += listRow;
 		});
 		console.log(birthdayList);
-		return await result;
+		return result;
 	};
 
 	// let bdListHtml = await getList(bdays);
