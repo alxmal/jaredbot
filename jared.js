@@ -13,7 +13,7 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 bot.command("help@JaredTheScrumMasterBot", async ctx => {
 	let chatId = ctx.message.chat.id;
-	await ctx.replyWithAnimation(chatId, 'CgADBAADNAAD7RwMUBW9prtZ3mchFgQ');
+	await ctx.replyWithVideo(chatId, 'CgADBAADNAAD7RwMUBW9prtZ3mchFgQ');
 });
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
