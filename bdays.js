@@ -6,4 +6,4 @@ const bdays = [
     {user5: 10.10},
     {user6: 10.10}
 ]
-module.exports = []
+module.exports = bdays
