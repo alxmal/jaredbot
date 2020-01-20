@@ -56,7 +56,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 				listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
 					item[2]
 				).format("dddd Do MMMM")} \n ---------- \n`,
-				listBeforeRow = `<i>${item[0]}</i> ${item[1]} – <s>${moment(
+				listBeforeRow = `☑️ <i>${item[0]}</i> ${item[1]} – <s>${moment(
 					item[2]
 				).format("dddd Do MMMM")}</s> \n ---------- \n`;
 
@@ -71,7 +71,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 });
 
 bot.hears("🎁 У кого следующая днюха?", ctx => {
-	ctx.reply("Скоро день рождения у юзер2");
+	ctx.reply("🎉 Скоро день рождения у юзер2");
 });
 
 bot.mention("JaredTheScrumMasterBot", async ctx => {
