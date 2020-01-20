@@ -87,11 +87,11 @@ bot.hears("🎁 У кого следующая днюха?", ctx => {
 		return result;
 	};
 
-	let diffIdxArr = getNearestDateIndex(sortedBdays);
+	let diffIdxArr = getNearestDateIndex(sortedBdays),
+		nearestIdx = diffIdxArr.indexOf(Math.max(...diffIdxArr)),
+		nextBday = sortedBdays[nearestIdx];
 
-	console.log(diffIdxArr);
-
-	ctx.reply("🎉 Скоро день рождения у юзер2");
+	ctx.reply(`🎉 Скоро день рождения у ${nextBday[0]}`);
 });
 
 bot.mention("JaredTheScrumMasterBot", async ctx => {
