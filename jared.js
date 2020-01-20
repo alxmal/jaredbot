@@ -1,14 +1,14 @@
 const Telegraf = require("telegraf");
 const { Markup, Extra } = Telegraf;
 const axios = require("axios");
-const moment = require("moment");
+// const moment = require("moment");
 
-const bdays = require("./bdays");
+// const bdays = require("./bdays");
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
 const bot = new Telegraf(TOKEN);
 
-let now = moment();
+// let now = moment();
 
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
@@ -48,7 +48,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 	const getList = arr => {
 		let birthdayList = "";
 		arr.forEach(item => {
-			let listRow = `<b>${item[0]}</b> – ${item[1]} \n`;
+			let listRow = `<b>${item[0]}</b> (${item[1]}) – ${item[2]} \n`;
 			birthdayList += listRow;
 		});
 		return birthdayList;

@@ -1,8 +1,11 @@
 require("dotenv").config();
 const express = require("express");
 const CronJob = require("cron").CronJob;
+const bdays = require("./bdays");
 const pkg = require("./package.json");
+const moment = require("moment");
 
+let now = moment();
 const PORT = process.env.PORT;
 const app = express();
 
@@ -17,6 +20,8 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
 	console.log(`Jared Bot version ${pkg.version} running on port ${PORT}!`);
 });
+
+console.log(moment(now).isAfter())
 
 /////* Планировщик задач *////
 // let morningGreetJob = new CronJob({
