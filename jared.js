@@ -1,6 +1,5 @@
 const Telegraf = require("telegraf");
-const { Extra } = Telegraf;
-const Markup = require("telegraf/markup");
+const { Markup, Extra } = Telegraf;
 const axios = require("axios");
 
 const TOKEN = process.env.BOT_TOKEN;
@@ -15,7 +14,7 @@ bot.command("help@JaredTheScrumMasterBot", async ctx => {
 	const chatId = await ctx.chat.id;
 	console.log(chatId);
 	const result = await ctx.replyWithAnimation(
-		"https://media.giphy.com/media/ya4eevXU490Iw/giphy.gif"
+		"CgADBAADNAAD7RwMUBW9prtZ3mchFgQ"
 	);
 	return result;
 });
@@ -26,9 +25,18 @@ bot.hears(["hi", "привет", "Привет"], async ctx => {
 	return result;
 });
 
-bot.hears(["Эй, Джаред"], async ctx => {
+bot.hears(["Эй, Джаред"], async ({ reply }) => {
 	const username = await ctx.message.from.username;
-	const result = await ctx.reply(`Привет ${username}`);
+	const result = await reply(
+		`Чем могу помочь ${username}?`,
+		Markup.keyboard([
+			["🥳 Покажи список дней рождения"],
+			["🎁 У кого следующая днюха?"]
+		])
+			.oneTime()
+			.resize()
+			.extra()
+	);
 	return result;
 });
 
