@@ -44,7 +44,7 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 bot.hears("🥳 Покажи список дней рождения", ctx => {
 	const getList = arr => {
 		let birthdayList = "";
-		let result = bdays.forEach(item => {
+		let result = arr.forEach(item => {
 			let { name, date } = Object.entries(item);
 			let listRow = `<b>${name}</b> – ${date} `;
 			birthdayList += listRow;
@@ -52,7 +52,9 @@ bot.hears("🥳 Покажи список дней рождения", ctx => {
 		return result;
 	};
 
-	ctx.replyWithHTML(result);
+	let bdListHtml = getList(bdays)
+
+	ctx.replyWithHTML(bdListHtml);
 });
 
 bot.hears("🎁 У кого следующая днюха?", ctx =>
