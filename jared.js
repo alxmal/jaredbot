@@ -63,7 +63,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 					item[2]
 				).format("dddd Do MMMM")}</s> \n ---------- \n`;
 
-			console.log(now, isAfter);
+			// console.log(now, isAfter);
 
 			birthdayList += isAfter ? listAfterRow : listBeforeRow;
 		});
@@ -78,6 +78,9 @@ bot.hears("🎁 У кого следующая днюха?", ctx => {
 		arr.map(item => {
 			let now = moment(),
 				bday = moment(item[2]);
+
+			console.log(now, bday)
+			
 			return now.diff(bday, "days");
 		});
 	};
