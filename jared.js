@@ -11,17 +11,22 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Bot actions
 
-bot.command("help", async ctx => {
+bot.command("help@JaredTheScrumMasterBot", async ctx => {
 	const chatId = await ctx.chat.id;
 	console.log(chatId);
 	const result = await ctx.replyWithAnimation(
-		chatId,
 		"https://media.giphy.com/media/ya4eevXU490Iw/giphy.gif"
 	);
 	return result;
 });
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
+	const username = await ctx.message.from.username;
+	const result = await ctx.reply(`Привет ${username}`);
+	return result;
+});
+
+bot.hears(["Эй, Джаред"], async ctx => {
 	const username = await ctx.message.from.username;
 	const result = await ctx.reply(`Привет ${username}`);
 	return result;
