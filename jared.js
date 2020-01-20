@@ -45,15 +45,17 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 	const getList = async arr => {
 		let birthdayList = "";
 		let result = arr.forEach(item => {
-			console.log(item)
+			// console.log(item);
 			let { name, date } = Object.entries(item);
+			console.log(name, date);
 			let listRow = `<b>${name}</b> – ${date} `;
 			birthdayList += listRow;
 		});
+		console.log(birthdayList);
 		return await result;
 	};
 
-	let bdListHtml = await getList(bdays)
+	let bdListHtml = await getList(bdays);
 
 	return ctx.replyWithHTML(bdListHtml);
 });
