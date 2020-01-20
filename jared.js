@@ -2,6 +2,7 @@ const Telegraf = require("telegraf");
 const { Markup, Extra } = Telegraf;
 const axios = require("axios");
 
+const bdays = require("./bdays");
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
 const bot = new Telegraf(TOKEN);
@@ -40,15 +41,19 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 	return result;
 });
 
-bot.hears("🥳 Покажи список дней рождения", ctx =>
-	ctx.replyWithHTML(
-		`<b>Имя</b> - <i>DATE</i>
-		<b>Имя</b> - <i>DATE</i>
-		<b>Имя</b> - <i>DATE</i>
-		<b>Имя</b> - <i>DATE</i>
-		<b>Имя</b> - <i>DATE</i>`
-	)
-);
+bot.hears("🥳 Покажи список дней рождения", ctx => {
+	const getList = arr => {
+		let birthdayList = "";
+		let result = bdays.forEach(item => {
+			let { name, date } = Object.entries(item);
+			let listRow = `<b>${name}</b> – ${date} `;
+			birthdayList += listRow;
+		});
+		return result;
+	};
+
+	ctx.replyWithHTML(result);
+});
 
 bot.hears("🎁 У кого следующая днюха?", ctx =>
 	ctx.reply("Скоро день рождения у юзер2")
