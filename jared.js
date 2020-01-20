@@ -11,6 +11,8 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Bot actions
 
+bot.command("gifme@JaredTheScrumMasterBot", async ctx => await ctx.reply("Gif posted."));
+
 bot.hears(["hi", "привет", "Привет"], async ctx => {
 	const username = ctx.message.from.username;
 	await ctx.reply(`Привет ${username}`);
@@ -83,8 +85,6 @@ bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
 bot.on("chosen_inline_result", ({ chosenInlineResult }) => {
 	console.log("chosen inline result", chosenInlineResult);
 });
-
-bot.command("gifme", async ctx => await ctx.reply("Gif posted."));
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
