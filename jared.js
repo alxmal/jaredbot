@@ -45,6 +45,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 	const getList = arr => {
 		let birthdayList = "";
 		let result = arr.forEach(item => {
+			console.log(item)
 			let { name, date } = Object.entries(item);
 			let listRow = `<b>${name}</b> – ${date} `;
 			birthdayList += listRow;
