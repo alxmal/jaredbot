@@ -3,12 +3,9 @@ const express = require("express");
 const CronJob = require("cron").CronJob;
 const bdays = require("./bdays");
 const pkg = require("./package.json");
-const moment = require("moment");
 
-let now = moment();
 const PORT = process.env.PORT;
 const app = express();
-console.log(moment().format())
 
 // Load bot
 const jared = require("./jared")

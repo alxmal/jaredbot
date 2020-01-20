@@ -1,14 +1,15 @@
 const Telegraf = require("telegraf");
 const { Markup, Extra } = Telegraf;
 const axios = require("axios");
-// const moment = require("moment");
+const moment = require("moment");
 
-// const bdays = require("./bdays");
+moment.locale("ru");
+
+const bdays = require("./bdays");
+
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
 const bot = new Telegraf(TOKEN);
-
-// let now = moment();
 
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
@@ -60,9 +61,10 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 	return ctx.replyWithHTML(getList(bdays));
 });
 
-bot.hears("🎁 У кого следующая днюха?", ctx =>
-	ctx.reply("Скоро день рождения у юзер2")
-);
+bot.hears("🎁 У кого следующая днюха?", ctx => {
+	console.log(moment().format());
+	ctx.reply("Скоро день рождения у юзер2");
+});
 
 bot.mention("JaredTheScrumMasterBot", async ctx => {
 	let answers = [
