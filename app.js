@@ -8,6 +8,7 @@ const moment = require("moment");
 let now = moment();
 const PORT = process.env.PORT;
 const app = express();
+console.log(moment().format())
 
 // Load bot
 const jared = require("./jared")
@@ -21,7 +22,6 @@ app.listen(PORT, () => {
 	console.log(`Jared Bot version ${pkg.version} running on port ${PORT}!`);
 });
 
-console.log(moment().format())
 
 /////* Планировщик задач *////
 // let morningGreetJob = new CronJob({
