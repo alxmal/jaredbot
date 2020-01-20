@@ -30,12 +30,7 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 	const result = await reply(
 		`Чем могу помочь ${username}?`,
 		Markup.keyboard([
-			[
-				Markup.callbackButton(
-					"🥳 Покажи список дней рождения",
-					"showBirthDaysList"
-				)
-			],
+			["🥳 Покажи список дней рождения"],
 			["🎁 У кого следующая днюха?"]
 		])
 			.oneTime()
@@ -45,7 +40,7 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 	return result;
 });
 
-bot.action("showBirthDaysList", ctx =>
+bot.hears("🥳 Покажи список дней рождения", ctx =>
 	ctx.reply(
 		`user 1 - dd.mm
 	user 2 - dd.mm
@@ -55,7 +50,7 @@ bot.action("showBirthDaysList", ctx =>
 );
 
 bot.hears("🎁 У кого следующая днюха?", ctx =>
-	ctx.reply("Free hugs. Call now!")
+	ctx.reply("Скоро день рождения у юзер2")
 );
 
 bot.mention("JaredTheScrumMasterBot", async ctx => {
@@ -117,7 +112,7 @@ bot.on("chosen_inline_result", ({ chosenInlineResult }) => {
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
-	console.log(ctx);
+	// console.log(ctx);
 });
 
 bot.catch((err, ctx) => {
