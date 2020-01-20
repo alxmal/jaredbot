@@ -79,9 +79,11 @@ bot.hears("🎁 У кого следующая днюха?", ctx => {
 			let now = moment(),
 				bday = moment(item[2]);
 
-			console.log(now, bday)
-			
-			return now.diff(bday, "days");
+			// console.log(now, bday);
+
+			let diff = now.diff(bday, "days");
+			console.log(diff)
+			return diff;
 		});
 	};
 
