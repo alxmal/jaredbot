@@ -12,8 +12,9 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 // Bot actions
 
 bot.command("help@JaredTheScrumMasterBot", ctx => {
-	const chatId = ctx.message.chat.id;
-	return ctx.replyWithVideo(chatId, 'CgADBAADNAAD7RwMUBW9prtZ3mchFgQ');
+	const chatId = ctx.chat.id;
+	console.log(chatId)
+	// return ctx.replyWithVideo(chatId, 'CgADBAADNAAD7RwMUBW9prtZ3mchFgQ');
 });
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
