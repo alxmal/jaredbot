@@ -10,8 +10,6 @@ const bot = new Telegraf(TOKEN);
 
 let now = moment();
 
-console.log(now);
-
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Bot actions
@@ -57,6 +55,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 	};
 
 	// let bdListHtml = await getList(bdays);
+	console.log(now);
 
 	return ctx.replyWithHTML(getList(bdays));
 });
