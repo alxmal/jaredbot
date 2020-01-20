@@ -21,7 +21,7 @@ app.listen(PORT, () => {
 	console.log(`Jared Bot version ${pkg.version} running on port ${PORT}!`);
 });
 
-console.log(moment(now).isAfter())
+console.log(moment().format())
 
 /////* Планировщик задач *////
 // let morningGreetJob = new CronJob({
