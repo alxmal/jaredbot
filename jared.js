@@ -12,13 +12,14 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 // Bot actions
 
 bot.command("help@JaredTheScrumMasterBot", async ctx => {
-	const chatId = ctx.message.chat.id;
-	const result = await ctx.replyWithVideo(chatId, 'CgADBAADNAAD7RwMUBW9prtZ3mchFgQ');
-	return result;
+	const chatId = await ctx.message.chat.id;
+	console.log(ctx.message.chat)
+	// const result = await ctx.replyWithVideo(chatId, 'CgADBAADNAAD7RwMUBW9prtZ3mchFgQ');
+	// return result;
 });
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
-	const username = ctx.message.from.username;
+	const username = await ctx.message.from.username;
 	const result  = await ctx.reply(`Привет ${username}`);
 	return result;
 });
