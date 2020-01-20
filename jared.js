@@ -13,9 +13,8 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 bot.command("help@JaredTheScrumMasterBot", async ctx => {
 	const chatId = await ctx.message.chat.id;
-	console.log(ctx.message.chat)
-	// const result = await ctx.replyWithVideo(chatId, 'CgADBAADNAAD7RwMUBW9prtZ3mchFgQ');
-	// return result;
+	const result = await ctx.replyWithVideo(chatId, 'CgADBAADNAAD7RwMUBW9prtZ3mchFgQ');
+	return result;
 });
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
@@ -94,7 +93,7 @@ bot.on("chosen_inline_result", ({ chosenInlineResult }) => {
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
-	console.log(ctx.message);
+	console.log(ctx);
 });
 
 bot.catch((err, ctx) => {
