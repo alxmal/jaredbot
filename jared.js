@@ -30,7 +30,12 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 	const result = await reply(
 		`Чем могу помочь ${username}?`,
 		Markup.keyboard([
-			[Markup.callbackButton("🥳 Покажи список дней рождения", showBirthDaysList)],
+			[
+				Markup.callbackButton(
+					"🥳 Покажи список дней рождения",
+					"showBirthDaysList"
+				)
+			],
 			["🎁 У кого следующая днюха?"]
 		])
 			.oneTime()
@@ -40,12 +45,14 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 	return result;
 });
 
-bot.action('showBirthDaysList', ctx => ctx.reply(
-	`user 1 - dd.mm
+bot.action("showBirthDaysList", ctx =>
+	ctx.reply(
+		`user 1 - dd.mm
 	user 2 - dd.mm
 	user 3 - dd.mm
 	user 4 - dd.mm`
-	));
+	)
+);
 
 bot.hears("🎁 У кого следующая днюха?", ctx =>
 	ctx.reply("Free hugs. Call now!")
