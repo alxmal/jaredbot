@@ -60,7 +60,7 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 					item[2]
 				).format("dddd Do MMMM")}</s> \n ---------- \n`;
 
-			console.log(now);
+			console.log(now, isAfter);
 
 			birthdayList += isAfter ? listAfterRow : listBeforeRow;
 		});
