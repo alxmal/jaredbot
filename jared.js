@@ -1,11 +1,16 @@
 const Telegraf = require("telegraf");
 const { Markup, Extra } = Telegraf;
 const axios = require("axios");
+const moment = require("moment");
 
 const bdays = require("./bdays");
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
 const bot = new Telegraf(TOKEN);
+
+let now = moment();
+
+console.log(now);
 
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
@@ -36,7 +41,7 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 		])
 			.oneTime()
 			.resize()
-			.extra()
+			.selective()
 	);
 	return result;
 });
