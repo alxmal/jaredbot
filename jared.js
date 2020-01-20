@@ -41,11 +41,12 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 });
 
 bot.hears("🥳 Покажи список дней рождения", ctx =>
-	ctx.reply(
-		`user 1 - dd.mm
-	user 2 - dd.mm
-	user 3 - dd.mm
-	user 4 - dd.mm`
+	ctx.replyWithHTML(
+		`<b>Имя</b> - <i>DATE</i>
+		<b>Имя</b> - <i>DATE</i>
+		<b>Имя</b> - <i>DATE</i>
+		<b>Имя</b> - <i>DATE</i>
+		<b>Имя</b> - <i>DATE</i>`
 	)
 );
 
