@@ -8,7 +8,9 @@ moment.locale("ru");
 
 const bdays = require("./bdays");
 
-let sortedDaysByDate = bdays.slice().sort((a, b) => moment(a[2]) - moment(b[2]));
+let sortedDaysByDate = bdays
+	.slice()
+	.sort((a, b) => moment(a[2]) - moment(b[2]));
 
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
@@ -121,7 +123,9 @@ let checkBirthday = new CronJob({
 		let chatId = -378020872,
 			nearestDates = getClosestDatesValues(sortedDaysByDate),
 			closestIdx = getClosestDateIndex(nearestDates),
-			daysFromNow = moment(sortedDaysByDate[closestIdx][2]).toNow("dd hh"),
+			daysFromNow = moment(sortedDaysByDate[closestIdx][2]).toNow(
+				"dd hh"
+			),
 			name = sortedDaysByDate[closestIdx][0],
 			nextBday = sortedDaysByDate[closestIdx][2];
 
@@ -131,14 +135,15 @@ let checkBirthday = new CronJob({
 				daysToNext = next.diff(now, "days");
 
 			return daysToNext;
-		}
+		};
 
 		let days = checkNextBday(),
-			message = `Привет, через ${daysFromNow}, день рождения у ${name} \n
-			Предлагаю его кикнуть и обсудить подарок.`
-
-		// if (days <= 7) 
-		bot.telegram.sendMessage(chatId, message);
+			message = `Привет, через ${daysFromNow} день рождения у <b>${name}</b> \n Предлагаю кикнуть и обсудить подарок.`;
+		// if (days <= 7)
+		bot.telegram.sendMessage(chatId, message, {
+			parse_mode: "HTML",
+			disable_notification: true
+		});
 	},
 	start: true,
 	timeZone: "Europe/Moscow"
