@@ -1,20 +1,24 @@
 const Telegraf = require("telegraf");
 const { Markup, Extra } = Telegraf;
+const mongoose = require("mongoose");
 const axios = require("axios");
 const CronJob = require("cron").CronJob;
 const moment = require("moment");
+const ChatUser = require("./models/chatuser");
 
 moment.locale("ru");
 
 const bdays = require("./bdays");
-
-let sortedDaysByDate = bdays
+const sortedDaysByDate = bdays
 	.slice()
 	.sort((a, b) => moment(a[2]) - moment(b[2]));
 
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
+const DB = process.env.DB;
 const bot = new Telegraf(TOKEN);
+
+bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Utils
 const getClosestDatesValues = arr => {
@@ -29,7 +33,15 @@ const getClosestDateIndex = arr => {
 	return arr.indexOf(Math.min(...arr.filter(item => item > 0)));
 };
 
-bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
+/* MongoDB */
+await mongoose.connect(`${DB}`, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+});
+
+let db = mongoose.connection;
+db.once("open", () => console.log("connected to the database"));
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 /* Bot actions */
 
