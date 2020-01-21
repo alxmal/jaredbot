@@ -118,7 +118,7 @@ bot.catch((err, ctx) => {
 
 let checkBirthday = new CronJob({
 	// cronTime: "00 00 12 * * *",
-	cronTime: "* * * * *",
+	cronTime: "00 17 * * *",
 	onTick: () => {
 		let chatId = -378020872,
 			nearestDates = getClosestDatesValues(sortedDaysByDate),
@@ -138,7 +138,7 @@ let checkBirthday = new CronJob({
 		};
 
 		let days = checkNextBday(),
-			message = `Привет, через ${daysFromNow} день рождения у <b>${name}</b> \n Предлагаю кикнуть и обсудить подарок.`;
+			message = `<<<<TEST CRONJOB>>>> Привет! 👋\nЧерез ${daysFromNow} день рождения у <b>${name}</b>.\nДавайте обсудим подарок.`;
 		// if (days <= 7)
 		bot.telegram.sendMessage(chatId, message, {
 			parse_mode: "HTML",
