@@ -37,8 +37,8 @@ bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 	const result = await ctx.reply(
 		`Чем могу помочь ${username}?`,
 		Markup.inlineKeyboard([
-			Markup.callbackButton("🥳 Покажи список дней рождения", "bdlist"),
-			Markup.callbackButton("🎁 У кого следующая днюха?", "nextbd")
+			Markup.callbackButton("🥳 Покажи список ДР", "bdlist"),
+			Markup.callbackButton("🎁 Кто следующий?", "nextbd")
 		]).extra()
 	);
 	return result;
@@ -67,7 +67,39 @@ bot.action("bdlist", async (ctx, next) => {
 		return birthdayList;
 	};
 
-	return ctx.replyWithHTML(getList(sortedBdays), {
+	return ctx
+		.replyWithHTML(getList(sortedBdays), {
+			disable_notification: true
+		})
+		.then(() => next());
+});
+
+bot.action("nextbd", async (ctx, next) => {
+	const getNearestDateIndex = arr => {
+		return arr.map(item => {
+			let now = moment(moment().format("MM-DD")),
+				bday = moment(moment(item[2]).format("MM-DD"));
+			return bday.diff(now, "days");
+		});
+	};
+
+	let diffIdxArr = getNearestDateIndex(sortedBdays);
+
+	// const indexOfSmallest = arr => {
+	// 	return arr.indexOf(Math.min.apply(Math, arr));
+	// };
+
+	console.log(diffIdxArr);
+	
+	const smallestIdx = diffIdxArr.reduce((prev, current) => {
+		let result;
+		if (prev > 0 && prev < current) result = prev;
+		return result
+	});
+
+	console.log(smallestIdx);
+
+	ctx.reply("🎉 Скоро день рождения у юзер2", {
 		disable_notification: true
 	}).then(() => next());
 });
@@ -93,33 +125,33 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 	return result;
 });
 
-bot.hears("🥳 Покажи список дней рождения", async ctx => {
-	const getList = arr => {
-		let birthdayList = "";
-		arr.forEach(item => {
-			let now = moment().format("MM-DD"),
-				isAfter = moment(moment(item[2]).format("MM-DD")).isAfter(
-					now,
-					"month"
-				),
-				listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
-					item[2]
-				).format("dddd Do MMMM")} \n ---------- \n`,
-				listBeforeRow = `☑️ <i>${item[0]}</i> ${item[1]} – <s>${moment(
-					item[2]
-				).format("dddd Do MMMM")}</s> \n ---------- \n`;
+// bot.hears("🥳 Покажи список дней рождения", async ctx => {
+// 	const getList = arr => {
+// 		let birthdayList = "";
+// 		arr.forEach(item => {
+// 			let now = moment().format("MM-DD"),
+// 				isAfter = moment(moment(item[2]).format("MM-DD")).isAfter(
+// 					now,
+// 					"month"
+// 				),
+// 				listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
+// 					item[2]
+// 				).format("dddd Do MMMM")} \n ---------- \n`,
+// 				listBeforeRow = `☑️ <i>${item[0]}</i> ${item[1]} – <s>${moment(
+// 					item[2]
+// 				).format("dddd Do MMMM")}</s> \n ---------- \n`;
 
-			console.log(now, isAfter);
+// 			console.log(now, isAfter);
 
-			birthdayList += isAfter ? listAfterRow : listBeforeRow;
-		});
-		return birthdayList;
-	};
+// 			birthdayList += isAfter ? listAfterRow : listBeforeRow;
+// 		});
+// 		return birthdayList;
+// 	};
 
-	return ctx.replyWithHTML(getList(sortedBdays), {
-		disable_notification: true
-	});
-});
+// 	return ctx.replyWithHTML(getList(sortedBdays), {
+// 		disable_notification: true
+// 	});
+// });
 
 bot.hears("🎁 У кого следующая днюха?", ctx => {
 	const getNearestDateIndex = arr => {
