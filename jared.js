@@ -120,23 +120,20 @@ let checkBirthday = new CronJob({
 	onTick: () => {
 		let chatId = -378020872,
 			nearestDates = getClosestDatesValues(sortedDaysByDate),
-			closestIdx = getClosestDateIndex(nearestDates);
-		// nextBday = sortedDaysByDate[closestIdx][2];
+			closestIdx = getClosestDateIndex(nearestDates),
+			nextBday = sortedDaysByDate[closestIdx][2];
 
-		console.log(nearestDates);
-		console.log(closestIdx);
+		const checkNextBday = () => {
+			let now = moment(),
+				next = moment(nextBday),
+				daysToNext = next.diff(now, "days");
 
-		// const checkNextBday = () => {
-		// 	let now = moment(),
-		// 		next = moment(nextBday),
-		// 		daysToNext = next.diff(now, "days");
+			return daysToNext;
+		}
 
-		// 	return daysToNext;
-		// }
+		let days = checkNextBday()
 
-		// let days = checkNextBday()
-
-		// bot.sendMessage(chatId, days);
+		bot.sendMessage(chatId, days);
 	},
 	start: true,
 	timeZone: "Europe/Moscow"
