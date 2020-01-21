@@ -33,6 +33,14 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 /* Bot actions */
 
+bot.use(async (ctx, next) => {
+	let botInfo = await bot.telegram.getMe(),
+		chatInfo = await bot.telegram.getChat();
+
+	console.log(botInfo, chatInfo);
+	next();
+});
+
 bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 	const username = await ctx.message.from.first_name;
 	const result = await ctx.reply(
@@ -76,9 +84,11 @@ bot.action("nextbd", async (ctx, next) => {
 		daysFromNow = moment(sortedDaysByDate[closestIdx][2]).toNow("dd hh");
 
 	ctx.replyWithHTML(
-		`🎉 Ближайший ДР у <b>${sortedDaysByDate[smallestIdx][0]}</b> – ${moment(
-			sortedDaysByDate[smallestIdx][2]
-		).format("dddd Do MMMM")}, через ${daysFromNow}`,
+		`🎉 Ближайший ДР у <b>${
+			sortedDaysByDate[smallestIdx][0]
+		}</b> – ${moment(sortedDaysByDate[smallestIdx][2]).format(
+			"dddd Do MMMM"
+		)}, через ${daysFromNow}`,
 		{
 			disable_notification: true
 		}
@@ -139,12 +149,13 @@ let checkBirthday = new CronJob({
 		};
 
 		let days = checkNextBday(),
-			message = `(((TEST CRONJOB))) Привет! 👋\nЧерез ${daysFromNow} день рождения у <b>${name}</b>.\nДавайте кикнем именинника и обсудим подарок.`;
-		// if (days <= 7)
-		bot.telegram.sendMessage(chatId, message, {
-			parse_mode: "HTML",
-			disable_notification: true
-		});
+			message = `Привет! 👋\nЧерез ${daysFromNow} день рождения у <b>${name}</b>.\nДавайте кикнем именинника и обсудим подарок.`;
+		if (days <= 7) {
+			bot.telegram.sendMessage(chatId, message, {
+				parse_mode: "HTML",
+				disable_notification: true
+			});
+		}
 	},
 	start: true,
 	timeZone: "Europe/Moscow"
