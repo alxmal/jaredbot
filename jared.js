@@ -1,6 +1,7 @@
 const Telegraf = require("telegraf");
 const { Markup, Extra } = Telegraf;
 const axios = require("axios");
+const CronJob = require("cron").CronJob;
 const moment = require("moment");
 
 moment.locale("ru");
@@ -13,24 +14,24 @@ const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
 const bot = new Telegraf(TOKEN);
 
+// Utils
+const getClosestDatesValue = arr => {
+	return arr.map(item => {
+		let now = moment(),
+			bday = moment(item[2]);
+		return bday.diff(now, "days");
+	});
+};
+
+const getClosestDateIndex = (arr) => {
+	arr.indexOf(
+		Math.min(...arr.filter(item => item > 0))
+	);
+}
+
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
-// Bot actions
-
-// bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
-// 	const username = await ctx.message.from.username;
-// 	const result = await ctx.reply(
-// 		`Чем могу помочь ${username}?`,
-// 		Markup.keyboard([
-// 			["🥳 Покажи список дней рождения"],
-// 			["🎁 У кого следующая днюха?"]
-// 		])
-// 			.oneTime()
-// 			.resize()
-// 			.selective()
-// 	);
-// 	return result;
-// });
+/* Bot actions */
 
 bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 	const username = await ctx.message.from.first_name;
@@ -70,24 +71,14 @@ bot.action("bdlist", async (ctx, next) => {
 });
 
 bot.action("nextbd", async (ctx, next) => {
-	const getNearestDateIndex = arr => {
-		return arr.map(item => {
-			let now = moment(),
-				bday = moment(item[2]);
-			return bday.diff(now, "days");
-		});
-	};
-
-	let diffIdxArr = getNearestDateIndex(sortedBdays);
-	let smallestIdx = diffIdxArr.indexOf(
-		Math.min(...diffIdxArr.filter(item => item > 0))
-	);
-	let daysToNow = moment(sortedBdays[smallestIdx][2]).toNow('dd hh');
+	let nearestDates = getClosestDatesValue(sortedBdays),
+		closestIdx = getClosestDateIndex(nearestDates),
+		daysFromNow = moment(sortedBdays[closestIdx][2]).toNow('dd hh');
 
 	ctx.replyWithHTML(
 		`🎉 <b>${sortedBdays[smallestIdx][0]}</b> – ${moment(
 			sortedBdays[smallestIdx][2]
-		).format("dddd Do MMMM")}, через ${daysToNow}`,
+		).format("dddd Do MMMM")}, через ${daysFromNow}`,
 		{
 			disable_notification: true
 		}
@@ -102,73 +93,6 @@ bot.hears(["hi", "привет", "Привет"], async ctx => {
 	return result;
 });
 
-// bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
-// 	const username = await message.from.first_name;
-// 	const result = await reply(
-// 		`Чем могу помочь ${username}?`,
-// 		Markup.keyboard([
-// 			["🥳 Покажи список дней рождения"],
-// 			["🎁 У кого следующая днюха?"]
-// 		])
-// 			.oneTime()
-// 			.resize()
-// 			.selective()
-// 	);
-// 	return result;
-// });
-
-// bot.hears("🥳 Покажи список дней рождения", async ctx => {
-// 	const getList = arr => {
-// 		let birthdayList = "";
-// 		arr.forEach(item => {
-// 			let now = moment().format("MM-DD"),
-// 				isAfter = moment(moment(item[2]).format("MM-DD")).isAfter(
-// 					now,
-// 					"month"
-// 				),
-// 				listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
-// 					item[2]
-// 				).format("dddd Do MMMM")} \n ---------- \n`,
-// 				listBeforeRow = `☑️ <i>${item[0]}</i> ${item[1]} – <s>${moment(
-// 					item[2]
-// 				).format("dddd Do MMMM")}</s> \n ---------- \n`;
-
-// 			console.log(now, isAfter);
-
-// 			birthdayList += isAfter ? listAfterRow : listBeforeRow;
-// 		});
-// 		return birthdayList;
-// 	};
-
-// 	return ctx.replyWithHTML(getList(sortedBdays), {
-// 		disable_notification: true
-// 	});
-// });
-
-// bot.hears("🎁 У кого следующая днюха?", ctx => {
-// 	const getNearestDateIndex = arr => {
-// 		return arr.map(item => {
-// 			let now = moment(moment().format("MM-DD")),
-// 				bday = moment(moment(item[2]).format("MM-DD"));
-// 			return bday.diff(now, "days");
-// 		});
-// 	};
-
-// 	let diffIdxArr = getNearestDateIndex(sortedBdays);
-
-// 	const indexOfSmallest = arr => {
-// 		return arr.indexOf(Math.min.apply(Math, arr));
-// 	};
-
-// 	console.log(diffIdxArr);
-
-// 	let smallestIdx = indexOfSmallest(diffIdxArr);
-
-// 	console.log(smallestIdx);
-
-// 	ctx.reply("🎉 Скоро день рождения у юзер2", { disable_notification: true });
-// });
-
 bot.mention("JaredTheScrumMasterBot", async ctx => {
 	let answers = [
 		"Что? Нихуя не понимаю... 🤷‍♂️",
@@ -181,51 +105,6 @@ bot.mention("JaredTheScrumMasterBot", async ctx => {
 	await ctx.reply(getMessage(), { disable_notification: true });
 });
 
-// bot.on("inline_query", async ctx => {
-// 	let query = ctx.update.inline_query.query;
-// 	console.log(query);
-
-// 	if (query.startsWith("/")) {
-// 		if (query.startsWith("/help")) {
-// 			console.log("HELP");
-// 			ctx.reply("Джаред помогает.");
-// 		}
-// 	}
-// });
-
-// bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
-// 	try {
-// 		const apiUrl = `http://recipepuppy.com/api/?q=${inlineQuery.query}`;
-// 		const response = await axios.get(apiUrl);
-// 		const { results } = await response.data;
-
-// 		console.log(results);
-
-// 		const recipes = results
-// 			.filter(({ thumbnail }) => thumbnail)
-// 			.map(({ title, href, thumbnail }) => ({
-// 				type: "article",
-// 				id: thumbnail,
-// 				title: title,
-// 				description: title,
-// 				thumb_url: thumbnail,
-// 				input_message_content: {
-// 					message_text: title
-// 				},
-// 				reply_markup: Markup.inlineKeyboard([
-// 					Markup.urlButton("Go to recipe", href)
-// 				])
-// 			}));
-// 		return answerInlineQuery(recipes);
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// });
-
-// bot.on("chosen_inline_result", ({ chosenInlineResult }) => {
-// 	console.log("chosen inline result", chosenInlineResult);
-// });
-
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
 	console.log(ctx.message);
@@ -233,6 +112,33 @@ bot.on("message", ctx => {
 
 bot.catch((err, ctx) => {
 	console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
+});
+
+/* Cron Jobs */
+
+let checkBirthday = new CronJob({
+	// cronTime: "00 00 12 * * *",
+	cronTime: "* * * * *",
+	onTick: () => {
+		let chatId = -378020872,
+			nearestDates = getClosestDatesValue(sortedBdays),
+			closestIdx = getClosestDateIndex(nearestDates),
+			nextBday = sortedBdays[closestIdx][2];
+
+		const checkNextBday = () => {
+			let now = moment(),
+				next = moment(nextBday),
+				daysToNext = next.diff(now, "days");
+			
+			return daysToNext;
+		}
+
+		let days = checkNextBday()
+		
+		bot.sendMessage(chatId, days);
+	},
+	start: true,
+	timeZone: "Europe/Moscow"
 });
 
 module.exports = bot.webhookCallback(`/bot${TOKEN}`);
