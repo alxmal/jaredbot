@@ -49,10 +49,7 @@ bot.action("bdlist", async (ctx, next) => {
 		let birthdayList = "";
 		arr.forEach(item => {
 			let now = moment(),
-				isAfter = moment(item[2]).isAfter(
-					now,
-					"month"
-				),
+				isAfter = moment(item[2]).isAfter(now, "month"),
 				listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
 					item[2]
 				).format("dddd Do MMMM")} \n ---------- \n`,
@@ -85,11 +82,12 @@ bot.action("nextbd", async (ctx, next) => {
 	let smallestIdx = diffIdxArr.indexOf(
 		Math.min(...diffIdxArr.filter(item => item > 0))
 	);
+	let daysToNow = moment(sortedBdays[smallestIdx][2]).toNow('dd');
 
 	ctx.reply(
-		`🎉 ${sortedBdays[smallestIdx][0]} – ${moment(
+		`🎉 <b>${sortedBdays[smallestIdx][0]}</b> – ${moment(
 			sortedBdays[smallestIdx][2]
-		).format("dddd Do MMMM")}`,
+		).format("dddd Do MMMM")} \n Через ${daysToNow}`,
 		{
 			disable_notification: true
 		}
