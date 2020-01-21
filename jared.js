@@ -97,10 +97,11 @@ bot.action("nextbd", async (ctx, next) => {
 
 	let nextDay = sortedBdays
 		.map(day => {
-			return moment(day[2]);
+			return moment(moment(day[2]).format("MM-DD"));
 		})
-		.sort(m => m.valueOf())
 		.find(m => m.isAfter());
+
+	console.log(nextDay);
 
 	if (nextDay) {
 		console.log(`Next is - ${nextDay}, which is ${nextDay.fromNow()}`);
