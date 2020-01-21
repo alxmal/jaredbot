@@ -77,9 +77,10 @@ bot.action("bdlist", async (ctx, next) => {
 bot.action("nextbd", async (ctx, next) => {
 	const getNearestDateIndex = arr => {
 		return arr.map(item => {
-			let now = moment(moment().format("MM-DD")),
+			let now = moment(),
+				nowFormatted = now.format("MM-DD")
 				bday = moment(moment(item[2]).format("MM-DD"));
-			return bday.diff(now, "days");
+			return bday.diff(nowFormatted, "days");
 		});
 	};
 
