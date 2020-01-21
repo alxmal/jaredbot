@@ -133,7 +133,7 @@ let checkBirthday = new CronJob({
 
 		let days = checkNextBday()
 
-		bot.reply(chatId, days);
+		bot.telegram.sendMessage(chatId, days);
 	},
 	start: true,
 	timeZone: "Europe/Moscow"
