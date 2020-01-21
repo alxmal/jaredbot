@@ -75,13 +75,13 @@ bot.action("bdlist", async (ctx, next) => {
 });
 
 bot.action("nextbd", async (ctx, next) => {
-	// const getNearestDateIndex = arr => {
-	// 	return arr.map(item => {
-	// 		let now = moment(moment().format("MM-DD")),
-	// 			bday = moment(moment(item[2]).format("MM-DD"));
-	// 		return bday.diff(now, "days");
-	// 	});
-	// };
+	const getNearestDateIndex = arr => {
+		return arr.map(item => {
+			let now = moment(moment().format("MM-DD")),
+				bday = moment(moment(item[2]).format("MM-DD"));
+			return bday.diff(now, "days");
+		});
+	};
 
 	// let diffIdxArr = getNearestDateIndex(sortedBdays);
 
@@ -89,27 +89,11 @@ bot.action("nextbd", async (ctx, next) => {
 	// 	return arr.indexOf(Math.min.apply(Math, arr));
 	// };
 
-	// console.log(diffIdxArr);
+	console.log(diffIdxArr);
 
-	// let smallestIdx = diffIdxArr.indexOf(diffIdxArr.filter(item => item > 0).sort()[0]);
+	let smallestIdx = diffIdxArr.indexOf(Math.min(...diffIdxArr.filter(item => item > 0)))
 
-	// console.log(smallestIdx);
-
-	let nextDay = sortedBdays
-		.map(day => {
-			return moment(day[2]);
-		})
-		.sort(m => {
-			return m.valueOf();
-		});
-
-	console.log(nextDay);
-
-	if (nextDay) {
-		console.log(`Next is - ${nextDay}, which is ${nextDay.fromNow()}`);
-	} else {
-		console.log("No next event");
-	}
+	console.log(smallestIdx);
 
 	ctx.reply("🎉 Скоро день рождения у юзер2", {
 		disable_notification: true
