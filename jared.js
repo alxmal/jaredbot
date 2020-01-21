@@ -91,10 +91,7 @@ bot.action("nextbd", async (ctx, next) => {
 
 	console.log(diffIdxArr);
 
-	const smallestIdx = diffIdxArr.reduce((a, b) => {
-		console.log(a, b);
-		if (a > 0) Math.min(a, b);
-	});
+	let smallestIdx = arr.indexOf(arr.filter(item => item > 0).sort()[0]);
 
 	console.log(smallestIdx);
 
@@ -235,7 +232,7 @@ bot.mention("JaredTheScrumMasterBot", async ctx => {
 
 bot.on("message", ctx => {
 	console.log(ctx.message.text);
-	// console.log(ctx);
+	console.log(ctx.message);
 });
 
 bot.catch((err, ctx) => {
