@@ -76,7 +76,7 @@ bot.action("nextbd", async (ctx, next) => {
 		daysFromNow = moment(sortedDaysByDate[closestIdx][2]).toNow("dd hh");
 
 	ctx.replyWithHTML(
-		`🎉 <b>${sortedDaysByDate[smallestIdx][0]}</b> – ${moment(
+		`🎉 Ближайший ДР у <b>${sortedDaysByDate[smallestIdx][0]}</b> – ${moment(
 			sortedDaysByDate[smallestIdx][2]
 		).format("dddd Do MMMM")}, через ${daysFromNow}`,
 		{
