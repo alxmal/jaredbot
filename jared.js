@@ -82,12 +82,12 @@ bot.action("nextbd", async (ctx, next) => {
 	let smallestIdx = diffIdxArr.indexOf(
 		Math.min(...diffIdxArr.filter(item => item > 0))
 	);
-	let daysToNow = moment(sortedBdays[smallestIdx][2]).toNow('dd');
+	let daysToNow = moment(sortedBdays[smallestIdx][2]).toNow();
 
-	ctx.reply(
+	ctx.replyWithHTML(
 		`🎉 <b>${sortedBdays[smallestIdx][0]}</b> – ${moment(
 			sortedBdays[smallestIdx][2]
-		).format("dddd Do MMMM")} \n Через ${daysToNow}`,
+		).format("dddd Do MMMM")}, через ${daysToNow}`,
 		{
 			disable_notification: true
 		}
