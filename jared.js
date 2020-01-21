@@ -95,9 +95,13 @@ bot.action("nextbd", async (ctx, next) => {
 
 	// console.log(smallestIdx);
 
-	let nextDay = sortedBdays.map(day => {
-		return moment(day[2]);
-	});
+	let nextDay = sortedBdays
+		.map(day => {
+			return moment(day[2]);
+		})
+		.sort(m => {
+			return m.valueOf();
+		});
 
 	console.log(nextDay);
 
