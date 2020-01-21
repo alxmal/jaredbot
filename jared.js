@@ -89,7 +89,7 @@ bot.action("nextbd", async (ctx, next) => {
 	);
 
 	ctx.reply(
-		`🎉 Скоро день рождения у ${sortedBdays[smallestIdx][0]} \n ${moment(
+		`🎉 ${sortedBdays[smallestIdx][0]} – ${moment(
 			sortedBdays[smallestIdx][2]
 		).format("dddd Do MMMM")}`,
 		{
