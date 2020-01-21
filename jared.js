@@ -17,11 +17,17 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Bot actions
 
-bot.command("help@JaredTheScrumMasterBot", async ctx => {
-	const chatId = await ctx.chat.id;
-	const result = await ctx.replyWithAnimation(
-		"CgADBAADNAAD7RwMUBW9prtZ3mchFgQ",
-		{ caption: "Пишите – Эй, Джаред" }
+bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
+	const username = await ctx.message.from.username;
+	const result = await ctx.reply(
+		`Чем могу помочь ${username}?`,
+		Markup.keyboard([
+			["🥳 Покажи список дней рождения"],
+			["🎁 У кого следующая днюха?"]
+		])
+			.oneTime()
+			.resize()
+			.selective()
 	);
 	return result;
 });
@@ -70,7 +76,9 @@ bot.hears("🥳 Покажи список дней рождения", async ctx 
 		return birthdayList;
 	};
 
-	return ctx.replyWithHTML(getList(sortedBdays));
+	return ctx.replyWithHTML(getList(sortedBdays), {
+		disable_notification: true
+	});
 });
 
 bot.hears("🎁 У кого следующая днюха?", ctx => {
@@ -88,14 +96,13 @@ bot.hears("🎁 У кого следующая днюха?", ctx => {
 		return arr.indexOf(Math.min.apply(Math, arr));
 	};
 
-	
 	console.log(diffIdxArr);
-	
-	let smallestIdx = indexOfSmallest(diffIdxArr)
 
-	console.log(smallestIdx)
+	let smallestIdx = indexOfSmallest(diffIdxArr);
 
-	ctx.reply("🎉 Скоро день рождения у юзер2");
+	console.log(smallestIdx);
+
+	ctx.reply("🎉 Скоро день рождения у юзер2", { disable_notification: true });
 });
 
 bot.mention("JaredTheScrumMasterBot", async ctx => {
@@ -107,7 +114,7 @@ bot.mention("JaredTheScrumMasterBot", async ctx => {
 	];
 	const getMessage = () =>
 		answers[Math.floor(Math.random() * answers.length)];
-	await ctx.reply(getMessage());
+	await ctx.reply(getMessage(), { disable_notification: true });
 });
 
 // bot.on("inline_query", async ctx => {
