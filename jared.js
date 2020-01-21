@@ -95,10 +95,9 @@ bot.action("nextbd", async (ctx, next) => {
 
 	// console.log(smallestIdx);
 
-	let nextDay = sortedBdays
-		.map(day => {
-			return moment(moment(day[2]).format("MM-DD"));
-		})
+	let nextDay = sortedBdays.map(day => {
+		return moment(day[2]);
+	});
 
 	console.log(nextDay);
 
@@ -119,20 +118,20 @@ bot.hears(["hi", "привет", "Привет"], async ctx => {
 	return result;
 });
 
-bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
-	const username = await message.from.first_name;
-	const result = await reply(
-		`Чем могу помочь ${username}?`,
-		Markup.keyboard([
-			["🥳 Покажи список дней рождения"],
-			["🎁 У кого следующая днюха?"]
-		])
-			.oneTime()
-			.resize()
-			.selective()
-	);
-	return result;
-});
+// bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
+// 	const username = await message.from.first_name;
+// 	const result = await reply(
+// 		`Чем могу помочь ${username}?`,
+// 		Markup.keyboard([
+// 			["🥳 Покажи список дней рождения"],
+// 			["🎁 У кого следующая днюха?"]
+// 		])
+// 			.oneTime()
+// 			.resize()
+// 			.selective()
+// 	);
+// 	return result;
+// });
 
 // bot.hears("🥳 Покажи список дней рождения", async ctx => {
 // 	const getList = arr => {
