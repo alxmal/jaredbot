@@ -8,14 +8,14 @@ moment.locale("ru");
 
 const bdays = require("./bdays");
 
-let sortedBdays = bdays.slice().sort((a, b) => moment(a[2]) - moment(b[2]));
+let sortedDaysByDate = bdays.slice().sort((a, b) => moment(a[2]) - moment(b[2]));
 
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
 const bot = new Telegraf(TOKEN);
 
 // Utils
-const getClosestDatesValue = arr => {
+const getClosestDatesValues = arr => {
 	return arr.map(item => {
 		let now = moment(),
 			bday = moment(item[2]);
@@ -24,7 +24,7 @@ const getClosestDatesValue = arr => {
 };
 
 const getClosestDateIndex = arr => {
-	arr.indexOf(Math.min(...arr.filter(item => item > 0)));
+	return arr.indexOf(Math.min(...arr.filter(item => item > 0)));
 };
 
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
@@ -62,20 +62,20 @@ bot.action("bdlist", async (ctx, next) => {
 	};
 
 	return ctx
-		.replyWithHTML(getList(sortedBdays), {
+		.replyWithHTML(getList(sortedDaysByDate), {
 			disable_notification: true
 		})
 		.then(() => next());
 });
 
 bot.action("nextbd", async (ctx, next) => {
-	let nearestDates = getClosestDatesValue(sortedBdays),
+	let nearestDates = getClosestDatesValues(sortedDaysByDate),
 		closestIdx = getClosestDateIndex(nearestDates),
-		daysFromNow = moment(sortedBdays[closestIdx][2]).toNow("dd hh");
+		daysFromNow = moment(sortedDaysByDate[closestIdx][2]).toNow("dd hh");
 
 	ctx.replyWithHTML(
-		`🎉 <b>${sortedBdays[smallestIdx][0]}</b> – ${moment(
-			sortedBdays[smallestIdx][2]
+		`🎉 <b>${sortedDaysByDate[smallestIdx][0]}</b> – ${moment(
+			sortedDaysByDate[smallestIdx][2]
 		).format("dddd Do MMMM")}, через ${daysFromNow}`,
 		{
 			disable_notification: true
@@ -119,9 +119,9 @@ let checkBirthday = new CronJob({
 	cronTime: "* * * * *",
 	onTick: () => {
 		let chatId = -378020872,
-			nearestDates = getClosestDatesValue(sortedBdays),
+			nearestDates = getClosestDatesValues(sortedDaysByDate),
 			closestIdx = getClosestDateIndex(nearestDates);
-		// nextBday = sortedBdays[closestIdx][2];
+		// nextBday = sortedDaysByDate[closestIdx][2];
 
 		console.log(nearestDates);
 		console.log(closestIdx);
