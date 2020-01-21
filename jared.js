@@ -37,8 +37,8 @@ bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 	const result = await ctx.reply(
 		`Чем могу помочь ${username}?`,
 		Markup.inlineKeyboard([
-			Markup.callbackButton("🥳 Покажи список ДР", "bdlist"),
-			Markup.callbackButton("🎁 Кто следующий?", "nextbd")
+			Markup.callbackButton("🥳 Все ДР", "bdlist"),
+			Markup.callbackButton("🎁 Следующий", "nextbd")
 		]).extra()
 	);
 	return result;
@@ -59,8 +59,6 @@ bot.action("bdlist", async (ctx, next) => {
 				listBeforeRow = `☑️ <i>${item[0]}</i> ${item[1]} – <s>${moment(
 					item[2]
 				).format("dddd Do MMMM")}</s> \n ---------- \n`;
-
-			console.log(now, isAfter);
 
 			birthdayList += isAfter ? listAfterRow : listBeforeRow;
 		});
