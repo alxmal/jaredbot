@@ -99,7 +99,6 @@ bot.action("nextbd", async (ctx, next) => {
 		.map(day => {
 			return moment(moment(day[2]).format("MM-DD"));
 		})
-		.find(m => m.isAfter());
 
 	console.log(nextDay);
 
