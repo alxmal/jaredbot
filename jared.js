@@ -115,7 +115,8 @@ bot.catch((err, ctx) => {
 /* Cron Jobs */
 
 let checkBirthday = new CronJob({
-	cronTime: "00 00 12 * * *",
+	// cronTime: "00 00 12 * * *",
+	cronTime: "* * * * *",
 	onTick: () => {
 		let chatId = -378020872,
 			nearestDates = getClosestDatesValues(sortedDaysByDate),
