@@ -95,7 +95,7 @@ bot.action("nextbd", async (ctx, next) => {
 
 	console.log(smallestIdx);
 
-	ctx.reply("🎉 Скоро день рождения у юзер2", {
+	ctx.reply(`🎉 Скоро день рождения у ${sortedBdays[smallestIdx][0]}`, {
 		disable_notification: true
 	}).then(() => next());
 });
