@@ -133,7 +133,7 @@ let checkBirthday = new CronJob({
 
 		let days = checkNextBday()
 
-		bot.sendMessage(chatId, days);
+		bot.reply(chatId, days);
 	},
 	start: true,
 	timeZone: "Europe/Moscow"
