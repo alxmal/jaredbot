@@ -20,7 +20,7 @@ const bot = new Telegraf(TOKEN);
 
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
-// Utils
+/* Utils */
 const getClosestDatesValues = arr => {
 	return arr.map(item => {
 		let now = moment(),
@@ -34,17 +34,16 @@ const getClosestDateIndex = arr => {
 };
 
 /* MongoDB */
-await mongoose.connect(`${DB}`, {
+mongoose.connect(`${DB}`, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 });
 
 let db = mongoose.connection;
-db.once("open", () => console.log("connected to the database"));
+db.once("open", () => console.log("Connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 /* Bot actions */
-
 bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 	const username = await ctx.message.from.first_name;
 	const result = await ctx.reply(
