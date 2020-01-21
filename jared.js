@@ -37,8 +37,8 @@ bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 	const result = await ctx.reply(
 		`Чем могу помочь ${username}?`,
 		Markup.inlineKeyboard([
-			Markup.callbackButton("🥳 Все ДР", "bdlist"),
-			Markup.callbackButton("🎁 Следующий", "nextbd")
+			Markup.callbackButton("🥳 Покажи список ДР", "bdlist"),
+			Markup.callbackButton("🎁 Кто следующий?", "nextbd")
 		]).extra()
 	);
 	return result;
@@ -78,10 +78,8 @@ bot.action("nextbd", async (ctx, next) => {
 	const getNearestDateIndex = arr => {
 		return arr.map(item => {
 			let now = moment(),
-				bday = moment(item[2]),
-				nowFormatted = now.format("MM-DD"),
-				bdayFormatted = bday.format("MM-DD")
-			return bdayFormatted.diff(nowFormatted, "days");
+				bday = moment(moment(item[2]), "MM-DD");
+			return bday.diff(now, "days");
 		});
 	};
 
