@@ -84,20 +84,18 @@ bot.action("nextbd", async (ctx, next) => {
 	};
 
 	let diffIdxArr = getNearestDateIndex(sortedBdays);
+	let smallestIdx = diffIdxArr.indexOf(
+		Math.min(...diffIdxArr.filter(item => item > 0))
+	);
 
-	// const indexOfSmallest = arr => {
-	// 	return arr.indexOf(Math.min.apply(Math, arr));
-	// };
-
-	console.log(diffIdxArr);
-
-	let smallestIdx = diffIdxArr.indexOf(Math.min(...diffIdxArr.filter(item => item > 0)))
-
-	console.log(smallestIdx);
-
-	ctx.reply(`🎉 Скоро день рождения у ${sortedBdays[smallestIdx][0]}`, {
-		disable_notification: true
-	}).then(() => next());
+	ctx.reply(
+		`🎉 Скоро день рождения у ${sortedBdays[smallestIdx][0]} \n ${moment(
+			sortedBdays[smallestIdx][2]
+		).format("dddd Do MMMM")}`,
+		{
+			disable_notification: true
+		}
+	).then(() => next());
 });
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
