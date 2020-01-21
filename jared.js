@@ -33,14 +33,6 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 /* Bot actions */
 
-bot.use(async (ctx, next) => {
-	let botInfo = await bot.telegram.getMe(),
-		chatInfo = await bot.telegram.getChat();
-
-	console.log(botInfo, chatInfo);
-	next();
-});
-
 bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 	const username = await ctx.message.from.first_name;
 	const result = await ctx.reply(
@@ -51,6 +43,11 @@ bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 		]).extra()
 	);
 	return result;
+});
+
+bot.command("rememberme@JaredTheScrumMasterBot", async ctx => {
+	// const username = await ctx.message.from.first_name;
+	console.log(ctx.message);
 });
 
 bot.action("bdlist", async (ctx, next) => {
