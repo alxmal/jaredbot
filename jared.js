@@ -92,8 +92,8 @@ bot.action("nextbd", async (ctx, next) => {
 	console.log(diffIdxArr);
 
 	const smallestIdx = diffIdxArr.reduce((a, b) => {
+		console.log(a, b);
 		if (a > 0) return Math.min(a, b);
-		else return
 	});
 
 	console.log(smallestIdx);
