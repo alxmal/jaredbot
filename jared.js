@@ -46,8 +46,13 @@ bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 });
 
 bot.command("rememberme@JaredTheScrumMasterBot", async ctx => {
-	// const username = await ctx.message.from.first_name;
-	console.log(ctx.message);
+	const userId = ctx.message.from.id;
+	const firstName = await ctx.message.from.first_name;
+	const username = await ctx.message.from.username;
+
+	console.log(userId);
+	console.log(firstName);
+	console.log(username);
 });
 
 bot.action("bdlist", async (ctx, next) => {
