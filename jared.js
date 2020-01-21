@@ -23,11 +23,9 @@ const getClosestDatesValue = arr => {
 	});
 };
 
-const getClosestDateIndex = (arr) => {
-	arr.indexOf(
-		Math.min(...arr.filter(item => item > 0))
-	);
-}
+const getClosestDateIndex = arr => {
+	arr.indexOf(Math.min(...arr.filter(item => item > 0)));
+};
 
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
@@ -73,7 +71,7 @@ bot.action("bdlist", async (ctx, next) => {
 bot.action("nextbd", async (ctx, next) => {
 	let nearestDates = getClosestDatesValue(sortedBdays),
 		closestIdx = getClosestDateIndex(nearestDates),
-		daysFromNow = moment(sortedBdays[closestIdx][2]).toNow('dd hh');
+		daysFromNow = moment(sortedBdays[closestIdx][2]).toNow("dd hh");
 
 	ctx.replyWithHTML(
 		`🎉 <b>${sortedBdays[smallestIdx][0]}</b> – ${moment(
@@ -122,20 +120,23 @@ let checkBirthday = new CronJob({
 	onTick: () => {
 		let chatId = -378020872,
 			nearestDates = getClosestDatesValue(sortedBdays),
-			closestIdx = getClosestDateIndex(nearestDates),
-			nextBday = sortedBdays[closestIdx][2];
+			closestIdx = getClosestDateIndex(nearestDates);
+		// nextBday = sortedBdays[closestIdx][2];
 
-		const checkNextBday = () => {
-			let now = moment(),
-				next = moment(nextBday),
-				daysToNext = next.diff(now, "days");
-			
-			return daysToNext;
-		}
+		console.log(nearestDates);
+		console.log(closestIdx);
 
-		let days = checkNextBday()
-		
-		bot.sendMessage(chatId, days);
+		// const checkNextBday = () => {
+		// 	let now = moment(),
+		// 		next = moment(nextBday),
+		// 		daysToNext = next.diff(now, "days");
+
+		// 	return daysToNext;
+		// }
+
+		// let days = checkNextBday()
+
+		// bot.sendMessage(chatId, days);
 	},
 	start: true,
 	timeZone: "Europe/Moscow"
