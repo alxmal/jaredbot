@@ -17,19 +17,35 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 // Bot actions
 
+// bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
+// 	const username = await ctx.message.from.username;
+// 	const result = await ctx.reply(
+// 		`Чем могу помочь ${username}?`,
+// 		Markup.keyboard([
+// 			["🥳 Покажи список дней рождения"],
+// 			["🎁 У кого следующая днюха?"]
+// 		])
+// 			.oneTime()
+// 			.resize()
+// 			.selective()
+// 	);
+// 	return result;
+// });
+
 bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 	const username = await ctx.message.from.username;
 	const result = await ctx.reply(
 		`Чем могу помочь ${username}?`,
-		Markup.keyboard([
-			["🥳 Покажи список дней рождения"],
-			["🎁 У кого следующая днюха?"]
-		])
-			.oneTime()
-			.resize()
-			.selective()
+		Markup.inlineKeyboard([
+			Markup.callbackButton("🥳 Покажи список дней рождения", "bdlist"),
+			Markup.callbackButton("🎁 У кого следующая днюха?", "nextbd")
+		]).extra()
 	);
 	return result;
+});
+
+bot.action("bdlist", async (ctx, next) => {
+	return ctx.reply("👍").then(() => next());
 });
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
