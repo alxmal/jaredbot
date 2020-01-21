@@ -95,14 +95,14 @@ bot.action("nextbd", async (ctx, next) => {
 
 	// console.log(smallestIdx);
 
-	let next = sortedBdays.map(day => {
+	let nextDay = sortedBdays.map(day => {
 		return moment(day[2])
 			.sort(m => m.valueOf())
 			.find(m => m.isAfter());
 	});
 
-	if (next) {
-		console.log(`Next is - ${next}, which is ${next.fromNow()}`);
+	if (nextDay) {
+		console.log(`Next is - ${nextDay}, which is ${nextDay.fromNow()}`);
 	} else {
 		console.log("No next event");
 	}
