@@ -83,7 +83,7 @@ bot.action("nextbd", async (ctx, next) => {
 		});
 	};
 
-	// let diffIdxArr = getNearestDateIndex(sortedBdays);
+	let diffIdxArr = getNearestDateIndex(sortedBdays);
 
 	// const indexOfSmallest = arr => {
 	// 	return arr.indexOf(Math.min.apply(Math, arr));
