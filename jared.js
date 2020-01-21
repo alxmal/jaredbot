@@ -33,7 +33,7 @@ bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 // });
 
 bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
-	const username = await ctx.message.from.username;
+	const username = await ctx.message.from.first_name;
 	const result = await ctx.reply(
 		`Чем могу помочь ${username}?`,
 		Markup.inlineKeyboard([
@@ -75,25 +75,37 @@ bot.action("bdlist", async (ctx, next) => {
 });
 
 bot.action("nextbd", async (ctx, next) => {
-	const getNearestDateIndex = arr => {
-		return arr.map(item => {
-			let now = moment(moment().format("MM-DD")),
-				bday = moment(moment(item[2]).format("MM-DD"));
-			return bday.diff(now, "days");
-		});
-	};
+	// const getNearestDateIndex = arr => {
+	// 	return arr.map(item => {
+	// 		let now = moment(moment().format("MM-DD")),
+	// 			bday = moment(moment(item[2]).format("MM-DD"));
+	// 		return bday.diff(now, "days");
+	// 	});
+	// };
 
-	let diffIdxArr = getNearestDateIndex(sortedBdays);
+	// let diffIdxArr = getNearestDateIndex(sortedBdays);
 
 	// const indexOfSmallest = arr => {
 	// 	return arr.indexOf(Math.min.apply(Math, arr));
 	// };
 
-	console.log(diffIdxArr);
+	// console.log(diffIdxArr);
 
-	let smallestIdx = arr.indexOf(arr.filter(item => item > 0).sort()[0]);
+	// let smallestIdx = diffIdxArr.indexOf(diffIdxArr.filter(item => item > 0).sort()[0]);
 
-	console.log(smallestIdx);
+	// console.log(smallestIdx);
+
+	let next = sortedBdays.map(day => {
+		return moment(day[2])
+			.sort(m => m.valueOf())
+			.find(m => m.isAfter());
+	});
+
+	if (next) {
+		console.log(`Next is - ${next}, which is ${next.fromNow()}`);
+	} else {
+		console.log("No next event");
+	}
 
 	ctx.reply("🎉 Скоро день рождения у юзер2", {
 		disable_notification: true
@@ -101,13 +113,13 @@ bot.action("nextbd", async (ctx, next) => {
 });
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
-	const username = await ctx.message.from.username;
+	const username = await ctx.message.from.first_name;
 	const result = await ctx.reply(`Привет ${username}`);
 	return result;
 });
 
 bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
-	const username = await message.from.username;
+	const username = await message.from.first_name;
 	const result = await reply(
 		`Чем могу помочь ${username}?`,
 		Markup.keyboard([
@@ -149,29 +161,29 @@ bot.hears(["Эй, Джаред"], async ({ reply, message }) => {
 // 	});
 // });
 
-bot.hears("🎁 У кого следующая днюха?", ctx => {
-	const getNearestDateIndex = arr => {
-		return arr.map(item => {
-			let now = moment(moment().format("MM-DD")),
-				bday = moment(moment(item[2]).format("MM-DD"));
-			return bday.diff(now, "days");
-		});
-	};
+// bot.hears("🎁 У кого следующая днюха?", ctx => {
+// 	const getNearestDateIndex = arr => {
+// 		return arr.map(item => {
+// 			let now = moment(moment().format("MM-DD")),
+// 				bday = moment(moment(item[2]).format("MM-DD"));
+// 			return bday.diff(now, "days");
+// 		});
+// 	};
 
-	let diffIdxArr = getNearestDateIndex(sortedBdays);
+// 	let diffIdxArr = getNearestDateIndex(sortedBdays);
 
-	const indexOfSmallest = arr => {
-		return arr.indexOf(Math.min.apply(Math, arr));
-	};
+// 	const indexOfSmallest = arr => {
+// 		return arr.indexOf(Math.min.apply(Math, arr));
+// 	};
 
-	console.log(diffIdxArr);
+// 	console.log(diffIdxArr);
 
-	let smallestIdx = indexOfSmallest(diffIdxArr);
+// 	let smallestIdx = indexOfSmallest(diffIdxArr);
 
-	console.log(smallestIdx);
+// 	console.log(smallestIdx);
 
-	ctx.reply("🎉 Скоро день рождения у юзер2", { disable_notification: true });
-});
+// 	ctx.reply("🎉 Скоро день рождения у юзер2", { disable_notification: true });
+// });
 
 bot.mention("JaredTheScrumMasterBot", async ctx => {
 	let answers = [
