@@ -100,7 +100,9 @@ bot.action("nextbd", async (ctx, next) => {
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
 	const username = await ctx.message.from.first_name;
-	const result = await ctx.reply(`Привет ${username}`);
+	const result = await ctx.reply(`Привет ${username}`, {
+		disable_notification: true
+	});
 	return result;
 });
 
