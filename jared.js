@@ -48,8 +48,8 @@ bot.action("bdlist", async (ctx, next) => {
 	const getList = arr => {
 		let birthdayList = "";
 		arr.forEach(item => {
-			let now = moment().format("MM-DD"),
-				isAfter = moment(moment(item[2]).format("MM-DD")).isAfter(
+			let now = moment(),
+				isAfter = moment(item[2]).isAfter(
 					now,
 					"month"
 				),
