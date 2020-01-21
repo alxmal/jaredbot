@@ -45,7 +45,31 @@ bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 });
 
 bot.action("bdlist", async (ctx, next) => {
-	return ctx.reply("👍").then(() => next());
+	const getList = arr => {
+		let birthdayList = "";
+		arr.forEach(item => {
+			let now = moment().format("MM-DD"),
+				isAfter = moment(moment(item[2]).format("MM-DD")).isAfter(
+					now,
+					"month"
+				),
+				listAfterRow = `<b>${item[0]}</b> ${item[1]} – ${moment(
+					item[2]
+				).format("dddd Do MMMM")} \n ---------- \n`,
+				listBeforeRow = `☑️ <i>${item[0]}</i> ${item[1]} – <s>${moment(
+					item[2]
+				).format("dddd Do MMMM")}</s> \n ---------- \n`;
+
+			console.log(now, isAfter);
+
+			birthdayList += isAfter ? listAfterRow : listBeforeRow;
+		});
+		return birthdayList;
+	};
+
+	return ctx.replyWithHTML(getList(sortedBdays), {
+		disable_notification: true
+	}).then(() => next());
 });
 
 bot.hears(["hi", "привет", "Привет"], async ctx => {
