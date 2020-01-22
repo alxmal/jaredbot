@@ -15,9 +15,11 @@ const sortedDaysByDate = bdays
 
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
-const DB = process.env.DB;
-const bot = new Telegraf(TOKEN);
+const DBHOST = process.env.DB;
+const DBUSER = process.env.DBUSER;
+const DBPWD = process.env.DBPWD;
 
+const bot = new Telegraf(TOKEN);
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
 /* Utils */
@@ -34,7 +36,9 @@ const getClosestDateIndex = arr => {
 };
 
 /* MongoDB */
-mongoose.connect(`${DB}`, {
+let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}`;
+
+mongoose.connect(mongoConnectString, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 });
@@ -42,6 +46,7 @@ mongoose.connect(`${DB}`, {
 let db = mongoose.connection;
 db.once("open", () => console.log("Connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
 
 /* Bot actions */
 bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
