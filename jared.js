@@ -18,6 +18,7 @@ const URL = process.env.URL;
 const DBHOST = process.env.DB;
 const DBUSER = process.env.DBUSER;
 const DBPWD = process.env.DBPWD;
+const DBNAME = process.env.DBNAME;
 
 const bot = new Telegraf(TOKEN);
 bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
@@ -36,7 +37,7 @@ const getClosestDateIndex = arr => {
 };
 
 /* MongoDB */
-let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}`;
+let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}/${DBNAME}`;
 
 mongoose.connect(mongoConnectString, {
 	useNewUrlParser: true,
@@ -46,7 +47,6 @@ mongoose.connect(mongoConnectString, {
 let db = mongoose.connection;
 db.once("open", () => console.log("Connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
-
 
 /* Bot actions */
 bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
