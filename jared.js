@@ -43,8 +43,8 @@ let mongoConnectString = `mongodb://127.0.0.1:27017`;
 mongoose.connect(mongoConnectString, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
-	user: "jared",
-	pass: "BSRT56PV4ftzsdFT",
+	user: "alxmal",
+	pass: "z;#<X6Q*pp(2AfP>",
 	dbName: "jareddb"
 });
 
