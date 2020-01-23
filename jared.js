@@ -43,6 +43,8 @@ let mongoConnectString = `mongodb://127.0.0.1:27017`;
 mongoose.connect(mongoConnectString, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
+	user: "jared",
+	pass: "BSRT56PV4ftzsdFT",
 	dbName: "jareddb"
 });
 
@@ -71,6 +73,8 @@ bot.command("rememberme@JaredTheScrumMasterBot", async ctx => {
 	console.log(userId);
 	console.log(firstName);
 	console.log(username);
+
+
 });
 
 bot.action("bdlist", async (ctx, next) => {
