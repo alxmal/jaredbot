@@ -37,11 +37,11 @@ const getClosestDateIndex = arr => {
 };
 
 /* MongoDB */
-let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}/${DBNAME}`;
+let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}/${DBNAME}?authSource=admin`;
 
 mongoose.connect(mongoConnectString, {
 	useNewUrlParser: true,
-	useUnifiedTopology: false
+	useUnifiedTopology: true
 });
 
 let db = mongoose.connection;
