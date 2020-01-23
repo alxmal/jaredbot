@@ -40,7 +40,8 @@ const getClosestDateIndex = arr => {
 let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}/${DBNAME}`;
 
 mongoose.connect(mongoConnectString, {
-	useNewUrlParser: true
+	useNewUrlParser: true,
+	useUnifiedTopology: false
 });
 
 let db = mongoose.connection;
