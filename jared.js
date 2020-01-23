@@ -15,7 +15,7 @@ const sortedDaysByDate = bdays
 
 const TOKEN = process.env.BOT_TOKEN;
 const URL = process.env.URL;
-const DBHOST = process.env.DB;
+const DBHOST = process.env.DBHOST;
 const DBUSER = process.env.DBUSER;
 const DBPWD = process.env.DBPWD;
 const DBNAME = process.env.DBNAME;
