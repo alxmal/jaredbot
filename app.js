@@ -1,7 +1,6 @@
 require("dotenv").config();
 const path = require("path");
 const express = require("express");
-const router = express.Router();
 const pkg = require("./package.json");
 
 const PORT = process.env.PORT;
@@ -16,11 +15,11 @@ app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
 
-router.get("/", (req, res) => {
+app.get("/say", (req, res) => {
 	res.sendFile(path.join(__dirname + "views/say.html"));
 });
 
-app.use('/', router);
+// app.use('/', router);
 
 app.listen(PORT, () => {
 	console.log(`Jared Bot version ${pkg.version} running on port ${PORT}!`);
