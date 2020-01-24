@@ -37,7 +37,7 @@ const getClosestDateIndex = arr => {
 };
 
 /* MongoDB */
-let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}/${DBNAME}?authSource=admin`;
+// let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}/${DBNAME}?authSource=admin`;
 let mongoConnectString = `mongodb://127.0.0.1:27017`;
 
 mongoose.connect(mongoConnectString, {
