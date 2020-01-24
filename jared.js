@@ -68,7 +68,7 @@ bot.command("rememberme@JaredTheScrumMasterBot", async ctx => {
 	const firstName = await ctx.message.from.first_name;
 	const lastName = await ctx.message.from.last_name;
 
-	console.log(userId);
+	console.log(id);
 	console.log(username);
 	console.log(firstName);
 	console.log(lastName);
