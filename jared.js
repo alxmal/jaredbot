@@ -77,7 +77,7 @@ bot.command("rememberme@JaredTheScrumMasterBot", async ctx => {
 		userId: id,
 		userName: username,
 		firstName: firstName,
-		lastName: lastname
+		lastName: lastName
 	});
 
 	user.save()
