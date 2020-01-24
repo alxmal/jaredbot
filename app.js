@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/say", (req, res) => {
-	res.sendFile(path.join(__dirname + "views/say.html"));
+	res.sendFile(path.join(__dirname + "/views/say.html"));
 });
 
 // app.use('/', router);
