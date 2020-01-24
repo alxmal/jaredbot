@@ -50,7 +50,7 @@ mongoose.connect(mongoConnectString, {
 
 let db = mongoose.connection;
 db.on("connecting", () => console.log("Connecting to DB..."));
-db.once("open", () => console.log("Connected to the DB"));
+db.once("open", () => console.log("Connected to the DB", dbName));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 /* Bot actions */
