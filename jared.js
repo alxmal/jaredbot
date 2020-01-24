@@ -37,20 +37,26 @@ const getClosestDateIndex = arr => {
 };
 
 /* MongoDB */
-// let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}/${DBNAME}?authSource=admin`;
+let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}/${DBNAME}?authSource=admin`;
 let mongoConnectString = `mongodb://127.0.0.1:27017`;
 
 mongoose.connect(mongoConnectString, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
+	server: {
+		socketOptions: {
+			socketTimeoutMS: 0,
+			connectionTimeout: 0
+		  }
+	}
 	// user: "jared",
 	// pass: "BSRT56PV4ftzsdFT",
-	dbName: "jareddb"
+	// dbName: "jareddb"
 });
 
 let db = mongoose.connection;
 db.on("connecting", () => console.log("Connecting to DB..."));
-db.once("open", (db) => console.log("Connected to the DB", db));
+db.once("open", () => console.log("Connected to the DB"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 /* Bot actions */
