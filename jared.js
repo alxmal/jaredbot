@@ -42,14 +42,14 @@ let mongoConnectString = `mongodb://127.0.0.1:27017`;
 
 mongoose.connect(mongoConnectString, {
 	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	user: "jared",
-	pass: "BSRT56PV4ftzsdFT",
-	dbName: "jareddb"
+	useUnifiedTopology: true
+	// user: "jared",
+	// pass: "BSRT56PV4ftzsdFT",
+	// dbName: "jareddb"
 });
 
 let db = mongoose.connection;
-db.on('connecting', () => console.log("Connecting to DB..."))
+db.on("connecting", () => console.log("Connecting to DB..."));
 db.once("open", () => console.log("Connected to the DB"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
@@ -74,8 +74,6 @@ bot.command("rememberme@JaredTheScrumMasterBot", async ctx => {
 	console.log(userId);
 	console.log(firstName);
 	console.log(username);
-
-
 });
 
 bot.action("bdlist", async (ctx, next) => {
