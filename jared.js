@@ -37,7 +37,7 @@ const getClosestDateIndex = arr => {
 };
 
 /* MongoDB */
-let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}/${DBNAME}`; 
+let mongoConnectString = `mongodb://${DBUSER}:${DBPWD}@${DBHOST}/${DBNAME}`;
 
 mongoose.connect(mongoConnectString, {
 	useNewUrlParser: true,
@@ -63,13 +63,30 @@ bot.command("heyjared@JaredTheScrumMasterBot", async ctx => {
 });
 
 bot.command("rememberme@JaredTheScrumMasterBot", async ctx => {
-	const userId = ctx.message.from.id;
-	const firstName = await ctx.message.from.first_name;
+	const id = ctx.message.from.id;
 	const username = await ctx.message.from.username;
+	const firstName = await ctx.message.from.first_name;
+	const lastName = await ctx.message.from.last_name;
 
 	console.log(userId);
-	console.log(firstName);
 	console.log(username);
+	console.log(firstName);
+	console.log(lastName);
+
+	const user = new ChatUser({
+		userId: id,
+		userName: username,
+		firstName: firstName,
+		lastName: lastname
+	});
+
+	user.save()
+		.then(result => {
+			console.log("User added", result);
+		})
+		.catch(err => {
+			console.log(err);
+		});
 });
 
 bot.action("bdlist", async (ctx, next) => {
