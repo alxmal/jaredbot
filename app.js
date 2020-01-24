@@ -14,6 +14,10 @@ app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
 
+app.get("/say", (req, res) => {
+	res.sendFile('say.html');
+});
+
 app.listen(PORT, () => {
 	console.log(`Jared Bot version ${pkg.version} running on port ${PORT}!`);
 });

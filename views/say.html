@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jared says</title>
+</head>
+<body>
+    <script>
+        function sendmessage(){
+            chat_id = document.getElementById("chatid").value;
+            token = document.getElementById("token").value;
+            message = document.getElementById("message").value;
+            $.get("https://api.telegram.org/bot"+token+"/sendMessage?text="+message+"&chat_id="+chat_id);
+        }
+    </script>
+    <input type="text" id="chatid" value="Chat ID"></br>
+    <input type="text" id="token" value="Bot Token"></br>
+    <input type="text" id="message" value="Message"></br>
+    <button onclick=sendmessage()>Say</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.3/jquery.min.js"></script>
+</body>
+</html>
